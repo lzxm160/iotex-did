@@ -24,6 +24,7 @@ contract IoTeXDIDStorage {
             str[2+i*2] = alphabet[uint(uint8(value[i + 12]) >> 4)];
             str[3+i*2] = alphabet[uint(uint8(value[i + 12]) & 0x0f)];
         }
+        // convert to iotex address
         return string(str);
     }
 
