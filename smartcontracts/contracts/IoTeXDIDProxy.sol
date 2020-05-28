@@ -5,11 +5,11 @@ import "./ownership/Ownable.sol";
 
 contract IoTeXDIDProxy is IoTeXDIDStorage,Ownable {
     // version=>contract address
-    mapping(string => address) internal versions;
+    mapping(string => address) internal allVersions;
     // version list
     string[] public versionList;
     // current version
-    string public version;
+    string public currentVersion;
     event Upgraded(string newVersion, address newImplementation);
 
     constructor(address logic) public {
@@ -17,22 +17,22 @@ contract IoTeXDIDProxy is IoTeXDIDStorage,Ownable {
     }
 
     function implementation() public view returns (address) {
-        return versions[version];
+        return allVersions[currentVersion];
     }
 
     function upgradeTo(string memory newVersion, address newImplementation) public onlyOwner {
         require(implementation() != newImplementation && newImplementation != address(0), "Old address is not allowed and implementation address should not be 0x");
         require(isContract(newImplementation), "Cannot set a proxy implementation to a non-contract address");
         require(bytes(newVersion).length > 0, "Version should not be empty string");
-        version = newVersion;
-        versions[version] = newImplementation;
-        versionList.push(version);
+        currentVersion = newVersion;
+        allVersions[currentVersion] = newImplementation;
+        versionList.push(currentVersion);
         emit Upgraded(newVersion, newImplementation);
     }
 
     function getImplFromVersion(string memory _version) public view onlyOwner returns(address) {
         require(bytes(_version).length > 0, "Version should not be empty string");
-        return versions[_version];
+        return allVersions[_version];
     }
 
     function isContract(address account) internal view returns (bool) {
