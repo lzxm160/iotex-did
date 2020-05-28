@@ -30,9 +30,9 @@ contract IoTeXDIDProxy is IoTeXDIDStorage,Ownable {
         emit Upgraded(newVersion, newImplementation);
     }
 
-    function getImplFromVersion(string calldata version) external  view onlyOwner returns(address) {
-        require(bytes(version).length > 0, "Version should not be empty string");
-        return versions[version];
+    function getImplFromVersion(string calldata _version) external  view onlyOwner returns(address) {
+        require(bytes(_version).length > 0, "Version should not be empty string");
+        return versions[_version];
     }
 
     function isContract(address account) internal view returns (bool) {
@@ -51,10 +51,10 @@ contract IoTeXDIDProxy is IoTeXDIDStorage,Ownable {
         require(_impl != address(0), "implementation not set");
 
         assembly {
-            ptr := mload(0x40)
+            let ptr := mload(0x40)
             calldatacopy(ptr, 0, calldatasize)
-            result := delegatecall(gas, _impl, ptr, calldatasize, 0, 0)
-            size := returndatasize
+            let result := delegatecall(gas, _impl, ptr, calldatasize, 0, 0)
+            let size := returndatasize
             returndatacopy(ptr, 0, size)
 
             switch result
