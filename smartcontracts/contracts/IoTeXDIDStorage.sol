@@ -13,7 +13,7 @@ contract IoTeXDIDStorage {
         return string(abi.encodePacked(didPrefix, addrToString(msg.sender)));
     }
 
-    function addrToString(address memory _addr) internal pure returns(string memory) {
+    function addrToString(address _addr) internal pure returns(string memory) {
         bytes32 value = bytes32(uint256(_addr));
         bytes memory alphabet = "0123456789abcdef";
 
@@ -27,7 +27,7 @@ contract IoTeXDIDStorage {
         return string(str);
     }
 
-    function compareStrings (string memory a, string memory b) internal pure returns (bool memory) {
+    function compareStrings (string memory a, string memory b) internal pure returns (bool) {
         return (keccak256(abi.encodePacked((toLower(a)))) == keccak256(abi.encodePacked((toLower(b)))));
     }
 
