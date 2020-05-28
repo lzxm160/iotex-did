@@ -43,13 +43,13 @@ contract IoTeXDID is IoTeXDIDStorage{
         emit DeleteDID(generateDIDString());
     }
 
-    function getHash(string did) public view returns (bytes32) {
+    function getHash(string did) public view returns (bytes32 memory) {
         string memory didString = toLower(did);
         require(dids[didString].exist, "did does not exist");
         return dids[didString].hash;
     }
 
-    function getURI(string did) public view returns (string) {
+    function getURI(string did) public view returns (string memory) {
         string memory didString = toLower(did);
         require(dids[didString].exist, "did does not exist");
         return dids[didString].uri;
