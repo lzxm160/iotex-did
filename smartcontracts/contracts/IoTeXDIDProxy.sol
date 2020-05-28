@@ -20,7 +20,7 @@ contract IoTeXDIDProxy is IoTeXDIDStorage,Ownable {
         return versions[version];
     }
 
-    function upgradeTo(string newVersion, address newImplementation) public onlyOwner {
+    function upgradeTo(string memory newVersion, address newImplementation) public onlyOwner {
         require(implementation() != newImplementation && newImplementation != address(0), "Old address is not allowed and implementation address should not be 0x");
         require(isContract(newImplementation), "Cannot set a proxy implementation to a non-contract address");
         require(bytes(newVersion).length > 0, "Version should not be empty string");
