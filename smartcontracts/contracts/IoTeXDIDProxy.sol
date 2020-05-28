@@ -5,7 +5,7 @@ import "./ownership/Ownable.sol";
 
 contract IoTeXDIDProxy is IoTeXDIDStorage,Ownable {
     // version=>contract address
-    mapping(string => address) internal allVersions;
+    mapping(string => address) public allVersions;
     // version list
     string[] public versionList;
     // current version
