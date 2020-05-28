@@ -1,43 +1,38 @@
-pragma solidity 0.4.24;
+pragma solidity ^0.4.24;
+
 import "./IoTeXDIDStorage.sol";
 import "./ownership/Ownable.sol";
+
 contract IoTeXDIDProxy is IoTeXDIDStorage,Ownable {
-    bool public isInitialized;
     // version=>contract address
-    mapping(string => address) internal _versions;
+    mapping(string => address) internal versions;
     // version list
     string[] public versionList;
     // current version
     string public version;
-    event Upgraded(string indexed newVersion, address indexed newImplementation);
+    event Upgraded(string newVersion, address newImplementation);
 
-    constructor(address logic_) public {
-        initialize(logic_);
-    }
-
-    function initialize(address logic_) onlyOwner external {
-        require(!isInitialized, "Account: has already initialized");
-        upgradeTo("0.0.1", logic_);
-        isInitialized = true;
+    constructor(address logic) public {
+        upgradeTo("0.0.1", logic);
     }
 
     function implementation() public view returns (address) {
-        return _versions[version];
+        return versions[version];
     }
 
-    function upgradeTo(string memory _newVersion, address _newImplementation) public onlyOwner {
-        require(implementation() != _newImplementation && _newImplementation != address(0), "Old address is not allowed and implementation address should not be 0x");
-        require(isContract(_newImplementation), "Cannot set a proxy implementation to a non-contract address");
-        require(bytes(_newVersion).length > 0, "Version should not be empty string");
-        version = _newVersion;
-        _versions[version] = _newImplementation;
-        versionList.push(_newVersion);
-        emit Upgraded(_newVersion, _newImplementation);
+    function upgradeTo(string newVersion, address newImplementation) public onlyOwner {
+        require(implementation() != newImplementation && newImplementation != address(0), "Old address is not allowed and implementation address should not be 0x");
+        require(isContract(newImplementation), "Cannot set a proxy implementation to a non-contract address");
+        require(bytes(newVersion).length > 0, "Version should not be empty string");
+        version = newVersion;
+        _versions[version] = newImplementation;
+        versionList.push(version);
+        emit Upgraded(_newVersion, newImplementation);
     }
 
-    function getImplFromVersion(string calldata _version) external  view onlyOwner returns(address) {
-        require(bytes(_version).length > 0, "Version should not be empty string");
-        return _versions[_version];
+    function getImplFromVersion(string calldata version) external  view onlyOwner returns(address) {
+        require(bytes(version).length > 0, "Version should not be empty string");
+        return versions[version];
     }
 
     function isContract(address account) internal view returns (bool) {
