@@ -1,4 +1,4 @@
-pragma solidity >=0.4.24 <=0.6.1;
+pragma solidity >=0.4.24 <=0.5.16;
 
 import "./IoTeXDIDStorage.sol";
 
