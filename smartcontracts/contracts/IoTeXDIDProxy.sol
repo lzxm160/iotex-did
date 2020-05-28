@@ -46,7 +46,7 @@ contract IoTeXDIDProxy is IoTeXDIDStorage,Ownable {
         return (codehash != accountHash && codehash != 0x0);
     }
 
-    function () payable external {
+    fallback() external {
         address _impl = implementation();
         require(_impl != address(0), "implementation not set");
 
