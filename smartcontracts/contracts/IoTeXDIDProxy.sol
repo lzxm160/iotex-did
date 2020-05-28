@@ -25,9 +25,9 @@ contract IoTeXDIDProxy is IoTeXDIDStorage,Ownable {
         require(isContract(newImplementation), "Cannot set a proxy implementation to a non-contract address");
         require(bytes(newVersion).length > 0, "Version should not be empty string");
         version = newVersion;
-        _versions[version] = newImplementation;
+        versions[version] = newImplementation;
         versionList.push(version);
-        emit Upgraded(_newVersion, newImplementation);
+        emit Upgraded(newVersion, newImplementation);
     }
 
     function getImplFromVersion(string calldata version) external  view onlyOwner returns(address) {
