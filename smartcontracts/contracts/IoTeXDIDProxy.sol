@@ -30,7 +30,7 @@ contract IoTeXDIDProxy is IoTeXDIDStorage,Ownable {
         emit Upgraded(newVersion, newImplementation);
     }
 
-    function getImplFromVersion(string memory _version) external  view onlyOwner returns(address) {
+    function getImplFromVersion(string memory _version) public view onlyOwner returns(address) {
         require(bytes(_version).length > 0, "Version should not be empty string");
         return versions[_version];
     }
