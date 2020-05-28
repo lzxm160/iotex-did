@@ -51,10 +51,10 @@ contract IoTeXDIDProxy is IoTeXDIDStorage,Ownable {
         require(_impl != address(0), "implementation not set");
 
         assembly {
-            let ptr := mload(0x40);
+            let ptr := mload(0x40)
             calldatacopy(ptr, 0, calldatasize);
-            let result := delegatecall(gas, _impl, ptr, calldatasize, 0, 0);
-            let size := returndatasize;
+            let result := delegatecall(gas, _impl, ptr, calldatasize, 0, 0)
+            let size := returndatasize
             returndatacopy(ptr, 0, size);
 
             switch result
