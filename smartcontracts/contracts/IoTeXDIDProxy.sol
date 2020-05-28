@@ -10,29 +10,29 @@ contract IoTeXDIDProxy is IoTeXDIDStorage,Ownable {
     string[] public versionList;
     // current version
     string public currentVersion;
-    event Upgraded(string newVersion, address newImplementation);
+    event Upgrade(string version, address addr);
 
-    constructor(address logic) public {
-        upgradeTo("0.0.1", logic);
+    constructor(address addr) public {
+        upgrade("0.0.1", addr);
     }
 
-    function implementation() public view returns (address) {
+    function currentDIDAddress() public view returns (address) {
         return allVersions[currentVersion];
     }
 
-    function upgradeTo(string memory newVersion, address newImplementation) public onlyOwner {
-        require(implementation() != newImplementation && newImplementation != address(0), "Old address is not allowed and implementation address should not be 0x");
-        require(isContract(newImplementation), "Cannot set a proxy implementation to a non-contract address");
-        require(bytes(newVersion).length > 0, "Version should not be empty string");
-        currentVersion = newVersion;
-        allVersions[currentVersion] = newImplementation;
+    function upgrade(string memory version, address addr) public onlyOwner {
+        require(currentDIDAddress() != addr && addr != address(0), "Old address is not allowed and contract address should not be 0x");
+        require(isContract(addr), "Cannot set a logic contract to a non-contract address");
+        require(bytes(version).length > 0, "Version should not be empty string");
+        currentVersion = version;
+        allVersions[currentVersion] = addr;
         versionList.push(currentVersion);
-        emit Upgraded(newVersion, newImplementation);
+        emit Upgrade(currentVersion, addr);
     }
 
-    function getImplFromVersion(string memory _version) public view returns(address) {
-        require(bytes(_version).length > 0, "Version should not be empty string");
-        return allVersions[_version];
+    function getDIDAddress(string memory version) public view returns(address) {
+        require(bytes(version).length > 0, "Version should not be empty string");
+        return allVersions[version];
     }
 
     function isContract(address account) internal view returns (bool) {
@@ -47,8 +47,8 @@ contract IoTeXDIDProxy is IoTeXDIDStorage,Ownable {
     }
 
     function() payable external {
-        address _impl = implementation();
-        require(_impl != address(0), "implementation not set");
+        address _impl = currentDIDAddress();
+        require(_impl != address(0), "did contract address not set");
 
         assembly {
             let ptr := mload(0x40)
