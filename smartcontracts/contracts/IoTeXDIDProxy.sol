@@ -47,7 +47,7 @@ contract IoTeXDIDProxy is IoTeXDIDStorage,Ownable {
     }
 
     // fallback
-    function () payable external fallback{
+    function () payable external {
         address _impl = implementation();
         require(_impl != address(0), "implementation not set");
 
