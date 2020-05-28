@@ -21,8 +21,8 @@ contract IoTeXDIDStorage {
         str[0] = '0';
         str[1] = 'x';
         for (uint i = 0; i < 20; i++) {
-            str[2+i*2] = alphabet[uint(value[i + 12] >> 4)];
-            str[3+i*2] = alphabet[uint(value[i + 12] & 0x0f)];
+            str[2+i*2] = alphabet[uint(uint8(value[i + 12]) >> 4)];
+            str[3+i*2] = alphabet[uint(uint8(value[i + 12]) & 0x0f)];
         }
         return string(str);
     }
@@ -35,8 +35,8 @@ contract IoTeXDIDStorage {
 		bytes memory bStr = bytes(str);
 		bytes memory bLower = new bytes(bStr.length);
 		for (uint i = 0; i < bStr.length; i++) {
-			if ((bStr[i] >= 65) && (bStr[i] <= 90)) {
-				bLower[i] = bytes1(int(bStr[i]) + 32);
+			if ((uint8(bStr[i]) >= 65) && (uint8(bStr[i]) <= 90)) {
+				bLower[i] = bytes1(uint8(bStr[i]) + 32);
 			} else {
 				bLower[i] = bStr[i];
 			}
