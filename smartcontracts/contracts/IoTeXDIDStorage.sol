@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity >=0.4.24 <0.6.0;
 
 contract IoTeXDIDStorage {
     string constant didPrefix = "did:io:";
