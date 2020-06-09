@@ -33,7 +33,7 @@ contract IoTeXDID is IoTeXDIDStorage{
     }
 
     function createDIDSigned(string memory id, uint8 sigV, bytes32 sigR, bytes32 sigS, bytes32 hash, string memory uri) public {
-        bytes32 sigHash = keccak256(id, "createDID", hash, uri);
+        bytes32 sigHash = keccak256(abi.encodePacked(id, "createDID", hash, uri));
         createDID(id, ecrecover(sigHash, sigV, sigR, sigS), hash, uri);
     }
 
@@ -47,7 +47,7 @@ contract IoTeXDID is IoTeXDIDStorage{
     }
 
     function updateHashSigned(string memory did, uint8 sigV, bytes32 sigR, bytes32 sigS, bytes32 hash) public {
-        bytes32 sigHash = keccak256(did, "updateHash", hash);
+        bytes32 sigHash = keccak256(abi.encodePacked(did, "updateHash", hash));
         updateHash(did, ecrecover(sigHash, sigV, sigR, sigS), hash);
     }
 
@@ -61,7 +61,7 @@ contract IoTeXDID is IoTeXDIDStorage{
     }
 
     function updateURISigned(string memory did, uint8 sigV, bytes32 sigR, bytes32 sigS, string memory uri) public {
-        bytes32 sigHash = keccak256(did, "updateURI", uri);
+        bytes32 sigHash = keccak256(abi.encodePacked(did, "updateURI", uri));
         updateURI(did, ecrecover(sigHash, sigV, sigR, sigS), uri);
     }
 
@@ -75,7 +75,7 @@ contract IoTeXDID is IoTeXDIDStorage{
     }
 
     function deleteDIDSigned(string memory did, uint8 sigV, bytes32 sigR, bytes32 sigS) public {
-        bytes32 sigHash = keccak256(did, "deleteDID");
+        bytes32 sigHash = keccak256(abi.encodePacked(did, "deleteDID"));
         deleteDID(did, ecrecover(sigHash, sigV, sigR, sigS));
     }
 
