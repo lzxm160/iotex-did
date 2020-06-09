@@ -1,9 +1,7 @@
 pragma solidity >=0.4.14 <0.6.0;
-import "./strings.sol";
 import "./IoTeXDIDStorage.sol";
 
 contract IoTeXDID is IoTeXDIDStorage{
-    using strings for *;
     modifier onlyDIDOwner(string memory didInput, address signer) {
         string memory didString = generateDIDString(signer);
         if (bytes(didInput).length > 0) {
@@ -34,7 +32,7 @@ contract IoTeXDID is IoTeXDIDStorage{
     }
 
     function createDIDSigned(string memory id, uint8 sigV, bytes32 sigR, bytes32 sigS, bytes32 hash, string memory uri) public {
-        bytes32 sigHash = keccak256(id.toSlice().concat("createDID".toSlice()).concat(string(hash).toSlice()).concat(uri.toSlice()));
+        bytes32 sigHash = keccak256(strConcat(id,"createDID",string(hash),uri));
         createDID(id, ecrecover(sigHash, sigV, sigR, sigS), hash, uri);
     }
 
@@ -90,5 +88,34 @@ contract IoTeXDID is IoTeXDIDStorage{
         string memory didString = toLower(did);
         require(dids[didString].exist, "did does not exist");
         return dids[didString].uri;
+    }
+
+    function strConcat(string _a, string _b, string _c, string _d, string _e) internal returns (string){
+        bytes memory _ba = bytes(_a);
+        bytes memory _bb = bytes(_b);
+        bytes memory _bc = bytes(_c);
+        bytes memory _bd = bytes(_d);
+        bytes memory _be = bytes(_e);
+        string memory abcde = new string(_ba.length + _bb.length + _bc.length + _bd.length + _be.length);
+        bytes memory babcde = bytes(abcde);
+        uint k = 0;
+        for (uint i = 0; i < _ba.length; i++) babcde[k++] = _ba[i];
+        for (i = 0; i < _bb.length; i++) babcde[k++] = _bb[i];
+        for (i = 0; i < _bc.length; i++) babcde[k++] = _bc[i];
+        for (i = 0; i < _bd.length; i++) babcde[k++] = _bd[i];
+        for (i = 0; i < _be.length; i++) babcde[k++] = _be[i];
+        return string(babcde);
+    }
+
+    function strConcat(string _a, string _b, string _c, string _d) internal returns (string) {
+        return strConcat(_a, _b, _c, _d, "");
+    }
+
+    function strConcat(string _a, string _b, string _c) internal returns (string) {
+        return strConcat(_a, _b, _c, "", "");
+    }
+
+    function strConcat(string _a, string _b) internal returns (string) {
+        return strConcat(_a, _b, "", "", "");
     }
 }
