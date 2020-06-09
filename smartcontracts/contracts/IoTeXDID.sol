@@ -96,12 +96,12 @@ contract IoTeXDID is IoTeXDIDStorage{
         bytes memory _bc = bytes(_c);
         bytes memory _bd = bytes(_d);
         string memory abcd = new string(_ba.length + _bb.length + _bc.length + _bd.length);
-        bytes memory badcd = bytes(abcd);
+        bytes memory babcd = bytes(abcd);
         uint k = 0;
         for (uint i = 0; i < _ba.length; i++) babcd[k++] = _ba[i];
         for (uint i = 0; i < _bb.length; i++) babcd[k++] = _bb[i];
         for (uint i = 0; i < _bc.length; i++) babcd[k++] = _bc[i];
         for (uint i = 0; i < _bd.length; i++) babcd[k++] = _bd[i];
-        return string(badcd);
+        return string(babcd);
     }
 }
