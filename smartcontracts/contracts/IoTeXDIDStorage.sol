@@ -1,4 +1,4 @@
-pragma solidity >=0.4.21 <0.6.0;
+pragma solidity >=0.4.14 <0.6.0;
 
 contract IoTeXDIDStorage {
     string constant didPrefix = "did:io:";
@@ -24,7 +24,7 @@ contract IoTeXDIDStorage {
             str[2+i*2] = alphabet[uint(uint8(value[i + 12]) >> 4)];
             str[3+i*2] = alphabet[uint(uint8(value[i + 12]) & 0x0f)];
         }
-        // convert to iotex address
+
         return string(str);
     }
 

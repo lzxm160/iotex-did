@@ -1,8 +1,9 @@
-pragma solidity >=0.4.21 <0.6.0;
-
+pragma solidity >=0.4.14 <0.6.0;
+import "./strings.sol";
 import "./IoTeXDIDStorage.sol";
 
 contract IoTeXDID is IoTeXDIDStorage{
+    using strings for *;
     modifier onlyDIDOwner(string memory didInput, address signer) {
         string memory didString = generateDIDString(signer);
         if (bytes(didInput).length > 0) {
@@ -33,7 +34,7 @@ contract IoTeXDID is IoTeXDIDStorage{
     }
 
     function createDIDSigned(string memory id, uint8 sigV, bytes32 sigR, bytes32 sigS, bytes32 hash, string memory uri) public {
-        bytes32 sigHash = keccak256(abi.encodePacked(id, "createDID", hash, uri));
+        bytes32 sigHash = keccak256(id.toSlice().concat("createDID".toSlice()).concat(string(hash).toSlice()).concat(uri.toSlice()));
         createDID(id, ecrecover(sigHash, sigV, sigR, sigS), hash, uri);
     }
 

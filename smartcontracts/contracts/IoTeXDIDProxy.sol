@@ -1,4 +1,4 @@
-pragma solidity >=0.4.21 <0.6.0;
+pragma solidity >=0.4.14 <0.6.0;
 
 import "./IoTeXDIDStorage.sol";
 import "./ownership/Ownable.sol";
