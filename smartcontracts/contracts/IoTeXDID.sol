@@ -90,7 +90,7 @@ contract IoTeXDID is IoTeXDIDStorage{
         return dids[didString].uri;
     }
 
-    function strConcat(string memory _a, string memory _b, bytes32 _bc, string memory _d) internal returns (bytes){
+    function strConcat(string memory _a, string memory _b, bytes32 _bc, string memory _d) internal returns (bytes memory){
         bytes memory _ba = bytes(_a);
         bytes memory _bb = bytes(_b);
         bytes memory _bd = bytes(_d);
