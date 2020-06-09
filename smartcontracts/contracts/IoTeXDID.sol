@@ -31,7 +31,7 @@ contract IoTeXDID is IoTeXDIDStorage{
         createDID(id, msg.sender, hash, uri);
     }
 
-    function createDIDSigned(string memory id, uint8 sigV, bytes32 sigR, bytes32 sigS, bytes32 memory hash, string memory uri) public {
+    function createDIDSigned(string memory id, uint8 sigV, bytes32 sigR, bytes32 sigS, bytes32 hash, string memory uri) public {
         bytes32 sigHash = keccak256(strConcat(id,"createDID",string(hash),uri));
         createDID(id, ecrecover(sigHash, sigV, sigR, sigS), hash, uri);
     }
@@ -90,10 +90,9 @@ contract IoTeXDID is IoTeXDIDStorage{
         return dids[didString].uri;
     }
 
-    function strConcat(string memory _a, string memory _b, string memory _c, string memory _d) internal returns (string memory){
+    function strConcat(string memory _a, string memory _b, bytes32 _bc, string memory _d) internal returns (string memory){
         bytes memory _ba = bytes(_a);
         bytes memory _bb = bytes(_b);
-        bytes memory _bc = bytes(_c);
         bytes memory _bd = bytes(_d);
         string memory abcd = new string(_ba.length + _bb.length + _bc.length + _bd.length);
         bytes memory babcd = bytes(abcd);
