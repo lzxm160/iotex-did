@@ -31,7 +31,7 @@ contract IoTeXDID is IoTeXDIDStorage{
         createDID(id, msg.sender, hash, uri);
     }
 
-    function createDIDSigned(string memory id, uint8 sigV, bytes32 sigR, bytes32 sigS, bytes32 hash, string memory uri) public {
+    function createDIDSigned(string memory id, uint8 sigV, bytes32 sigR, bytes32 sigS, bytes32 memory hash, string memory uri) public {
         bytes32 sigHash = keccak256(strConcat(id,"createDID",string(hash),uri));
         createDID(id, ecrecover(sigHash, sigV, sigR, sigS), hash, uri);
     }
@@ -102,6 +102,6 @@ contract IoTeXDID is IoTeXDIDStorage{
         for (uint i = 0; i < _bb.length; i++) babcd[k++] = _bb[i];
         for (uint i = 0; i < _bc.length; i++) babcd[k++] = _bc[i];
         for (uint i = 0; i < _bd.length; i++) babcd[k++] = _bd[i];
-        return string(babcd);
+        return babcd;
     }
 }
