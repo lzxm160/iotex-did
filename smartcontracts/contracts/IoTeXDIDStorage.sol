@@ -10,7 +10,11 @@ contract IoTeXDIDStorage {
     mapping(string => DID) public dids;
 
     function generateDIDString() internal view returns (string memory) {
-        return string(abi.encodePacked(didPrefix, addrToString(msg.sender)));
+        return generateDIDString(msg.sender);
+    }
+
+    function generateDIDString(address signer) internal view returns (string memory) {
+        return string(abi.encodePacked(didPrefix, addrToString(signer)));
     }
 
     function addrToString(address _addr) internal pure returns(string memory) {
