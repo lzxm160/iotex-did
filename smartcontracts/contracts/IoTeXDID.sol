@@ -1,4 +1,4 @@
-pragma solidity solidity >=0.4.14 <0.5.16;
+pragma solidity >=0.4.14 <0.6.0;
 
 contract IoTeXDID {
     modifier onlyDIDOwner(string didInput) {
