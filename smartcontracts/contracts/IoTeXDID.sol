@@ -46,7 +46,7 @@ contract IoTeXDID is IoTeXDIDStorage{
     }
 
     function updateHashSigned(string memory did, uint8 sigV, bytes32 sigR, bytes32 sigS, bytes32 hash) public {
-        bytes32 sigHash = keccak256(strConcat(did,"updateHash",hash));
+        bytes32 sigHash = keccak256(strConcat(did,"updateHash",hash,""));
         updateHash(did, ecrecover(sigHash, sigV, sigR, sigS), hash);
     }
 
