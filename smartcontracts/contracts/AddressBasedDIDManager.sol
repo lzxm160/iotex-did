@@ -23,7 +23,8 @@ contract AddressBasedDIDManager is DIDManagerBase {
 //            else if ((b2 >= 48)&&(b2 <= 57)) b2 -= 48;
 //            iaddr += (b1*16+b2);
 //        }
-        return bytes20(domainID);
+//        return bytes20(domainID);
+        return domainID;
     }
 
     function registerDID(bytes32 h, bytes memory uri) public {
