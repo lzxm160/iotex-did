@@ -25,8 +25,8 @@ contract Agentable {
         str[0] = '0';
         str[1] = 'x';
         for (uint i = 0; i < 20; i++) {
-            str[2+i*2] = alphabet[uint8(value[i + 12] >> 4)];
-            str[3+i*2] = alphabet[uint8(value[i + 12] & 0x0f)];
+            str[2+i*2] = alphabet[uint8(value[i + 2] >> 4)];
+            str[3+i*2] = alphabet[uint8(value[i + 2] & 0x0f)];
         }
         return string(str);
     }
