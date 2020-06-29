@@ -8,7 +8,7 @@ contract AddressBasedDIDManagerWithAgentEnabled is AddressBasedDIDManager, Agent
     constructor(bytes memory _prefix, address _dbAddr) AddressBasedDIDManager(_prefix, _dbAddr) public {}
     event authMsg(bytes msg);
     event register(address authorizer);
-
+    event hash(bytes32 msg);
     function registerByAgent(bytes32 h, bytes memory uri, address authorizer, bytes memory auth) public {
         bytes memory did = getDID(authorizer);
         bytes20 internalKey = bytes20(authorizer);
@@ -17,7 +17,7 @@ contract AddressBasedDIDManagerWithAgentEnabled is AddressBasedDIDManager, Agent
         bytes memory packed=abi.encodePacked("\x19Ethereum Signed Message:\n", uint2str(message.length), message);
         emit authMsg(message);
         emit authMsg(packed);
-        emit authMsg(keccak256(packed));
+        emit hash(keccak256(packed));
         emit register(getSigner(getCreateAuthMessage(did, h, uri, msg.sender), auth));
         require(authorizer == getSigner(getCreateAuthMessage(did, h, uri, msg.sender), auth), "invalid signature");
         internalCreateDID(did, internalKey, authorizer, h, uri);
