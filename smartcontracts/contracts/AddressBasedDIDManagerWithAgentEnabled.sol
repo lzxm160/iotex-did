@@ -6,13 +6,13 @@ import './Agentable.sol';
 contract AddressBasedDIDManagerWithAgentEnabled is AddressBasedDIDManager, Agentable {
 
     constructor(bytes memory _prefix, address _dbAddr) AddressBasedDIDManager(_prefix, _dbAddr) public {}
-    event registerByAgent(bytes auth, string did, bytes32 hash, string uri, address authorizer);
+    event register(bytes auth, string did, bytes32 hash, string uri, address authorizer);
 
     function registerByAgent(bytes32 h, bytes memory uri, address authorizer, bytes memory auth) public {
         bytes memory did = getDID(authorizer);
         bytes20 internalKey = bytes20(authorizer);
         require(!db.exist(internalKey), "duplicate DID");
-        emit registerByAgent(auth, string(did), h, string(uri),getSigner(getCreateAuthMessage(did, h, uri, msg.sender), auth));
+        emit register(auth, string(did), h, string(uri),getSigner(getCreateAuthMessage(did, h, uri, msg.sender), auth));
         require(authorizer == getSigner(getCreateAuthMessage(did, h, uri, msg.sender), auth), "invalid signature");
         internalCreateDID(did, internalKey, authorizer, h, uri);
     }
