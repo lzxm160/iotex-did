@@ -33,6 +33,7 @@ contract AddressBasedDIDManagerWithAgentEnabled is AddressBasedDIDManager, Agent
         emit authMsg(packed);
         emit hash(keccak256(packed));
         emit register(getSigner(getUpdateAuthMessage(did, h, uri, msg.sender), auth));
+        emit register(authorizer);
         require(authorizer == getSigner(getUpdateAuthMessage(did, h, uri, msg.sender), auth), "invalid signature");
         internalUpdateDID(did, internalKey, authorizer, h, uri);
     }
