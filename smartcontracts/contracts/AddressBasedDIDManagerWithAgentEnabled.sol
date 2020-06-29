@@ -13,7 +13,11 @@ contract AddressBasedDIDManagerWithAgentEnabled is AddressBasedDIDManager, Agent
         bytes memory did = getDID(authorizer);
         bytes20 internalKey = bytes20(authorizer);
         require(!db.exist(internalKey), "duplicate DID");
-        emit authMsg(getCreateAuthMessage(did, h, uri, msg.sender));
+        bytes msg=getCreateAuthMessage(did, h, uri, msg.sender);
+        bytes packed=abi.encodePacked("\x19Ethereum Signed Message:\n", uint2str(msg.length), msg);
+        emit authMsg(msg);
+        emit authMsg(packed);
+        emit authMsg(keccak256(packed));
         emit register(getSigner(getCreateAuthMessage(did, h, uri, msg.sender), auth));
         require(authorizer == getSigner(getCreateAuthMessage(did, h, uri, msg.sender), auth), "invalid signature");
         internalCreateDID(did, internalKey, authorizer, h, uri);
