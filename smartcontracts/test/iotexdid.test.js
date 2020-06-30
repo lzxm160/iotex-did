@@ -20,7 +20,7 @@ contract("AddressBasedDIDManagerWithAgentEnabled", function (accounts) {
       // let hash = 0x414efa99dfac6f4095d6954713fb0085268d400d6a05a8ae8a69b5b1c10b4bed;
       let testHash = web3.utils.sha3("test");
       console.log("testHash", testHash);
-      console.log("this.contract.toLowerCase()", this.contract.toLowerCase());
+      console.log("this.contract.toLowerCase()", this.contract);
       let uri = "s3://iotex-did/documents";
       let did = "did:io:" + accounts[1].toLowerCase();
       let msg =
