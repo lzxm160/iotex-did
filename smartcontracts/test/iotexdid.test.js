@@ -60,7 +60,7 @@ contract("AddressBasedDIDManagerWithAgentEnabled", function (accounts) {
       console.log(sig);
 
       await this.contract.registerByAgent(
-        hash.toString(16),
+        testHash,
         uri,
         accounts[1].toLowerCase(),
         sig
