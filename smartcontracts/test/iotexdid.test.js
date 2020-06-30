@@ -1,6 +1,6 @@
-const IoTeXDID = artifacts.require('IoTeXDID.sol');
+const IoTeXDID = artifacts.require('AddressBasedDIDManagerWithAgentEnabled.sol');
 
-contract('iotexdid', function(accounts) {
+contract('AddressBasedDIDManagerWithAgentEnabled', function(accounts) {
     beforeEach(async function() {
         this.contract = await IoTeXDID.new();
     });
@@ -8,7 +8,14 @@ contract('iotexdid', function(accounts) {
         it('success', async function() {
             let hash = web3.utils.fromAscii("hash");
             let uri = "s3://iotex-did/documents";
-            await this.contract.createDID(accounts[0], hash, uri, {from: accounts[0]});
+            let msg = 'I authorize' + accounts[0].toLowerCase() + ' to register ' + UUID;
+            console.log(msg);
+            let sig = await web3.eth.accounts.sign(msg, '0x1cd94a139f784fea91aee5a77b2519ab5852348a4525df12db2ef002d922e1e7');
+
+            sig = sig.signature;
+            console.log(sig);
+
+            await this.contract.createDID(UUID, sig, hash, uri, {from: accounts[0]});
         })
     })
 })
