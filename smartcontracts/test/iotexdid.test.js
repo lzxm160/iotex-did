@@ -30,7 +30,7 @@ contract("AddressBasedDIDManagerWithAgentEnabled", function (accounts) {
         " in contract with " +
         this.contract +
         " (" +
-        testHash +
+        testHash.getBytes() +
         ", " +
         uri +
         ")";
