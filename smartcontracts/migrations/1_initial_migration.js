@@ -15,6 +15,7 @@ module.exports = function(deployer) {
     return bytes;
   };
   var str = "did:io:";
-  deployer.deploy(IoTeXDID,str.getBytes(),address(0x0));
+  const zeroaddr = "0x0000000000000000000000000000000000000000"
+  deployer.deploy(IoTeXDID,str.getBytes(),zeroaddr);
   // deployer.deploy(MockDeviceDID, CloudServiceAddr);
 };
