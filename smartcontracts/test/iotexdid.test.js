@@ -17,7 +17,9 @@ contract("AddressBasedDIDManagerWithAgentEnabled", function (accounts) {
   });
   describe("create did", function () {
     it("success", async function () {
-      let hash = web3.utils.fromAscii("hash");
+      let hash = web3.utils.fromAscii(
+        "414efa99dfac6f4095d6954713fb0085268d400d6a05a8ae8a69b5b1c10b4bed"
+      );
       let uri = "s3://iotex-did/documents";
       let did = "did:io:" + accounts[1].toLowerCase();
       let msg =
@@ -28,7 +30,7 @@ contract("AddressBasedDIDManagerWithAgentEnabled", function (accounts) {
         " in contract with " +
         this.contract +
         " (" +
-        h +
+        hash +
         ", " +
         uri +
         ")";
