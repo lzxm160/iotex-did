@@ -56,14 +56,14 @@ contract("AddressBasedDIDManagerWithAgentEnabled", function (accounts) {
       //   accounts[1].privateKey
       // );
 
-      let sigs = sig.signature;
-      console.log("sigs", sigs);
+      // let sigs = sig.signature;
+      // console.log("sigs", sigs);
 
       await this.contract.registerByAgent(
         testHash,
         uri.getBytes(),
         accounts[1].toLowerCase(),
-        sigs
+        sig
       );
     });
   });
