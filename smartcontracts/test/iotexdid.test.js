@@ -61,7 +61,7 @@ contract("AddressBasedDIDManagerWithAgentEnabled", function (accounts) {
 
       // let sigs = sig.signature;
       // console.log("sigs", sigs);
-
+      console.log("sig", sig.slice(2, sig.byteLength));
       await this.contract.registerByAgent(
         testHash,
         uri.getBytes(),
