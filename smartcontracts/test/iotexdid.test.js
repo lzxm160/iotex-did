@@ -38,7 +38,7 @@ contract("AddressBasedDIDManagerWithAgentEnabled", function (accounts) {
       let prefix = "\x19Ethereum Signed Message:\n" + msg.length;
       console.log(prefix + msg);
 
-      let accounts = await web3.eth.getAccounts();
+      // let accounts = await web3.eth.getAccounts();
       // let msgHash1 = web3.utils.sha3(prefix + msg);
 
       let sig = await web3.eth.sign(msg, accounts[1]);
