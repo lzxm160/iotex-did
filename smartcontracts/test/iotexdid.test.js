@@ -42,7 +42,7 @@ contract("AddressBasedDIDManagerWithAgentEnabled", function (accounts) {
       // let msgHash1 = web3.utils.sha3(prefix + msg);
 
       let sig = await web3.eth.sign(msg, accounts[1]);
-
+      console.log("sig", sig);
       // let privateKey =
       //   "c87509a1c067bbde78beb793e6fa76530b6382a4c0241e5e4a9ec0a0f44dc0d3";
       //
@@ -57,7 +57,7 @@ contract("AddressBasedDIDManagerWithAgentEnabled", function (accounts) {
       // );
 
       let sigs = sig.signature;
-      console.log("sig", sigs);
+      console.log("sigs", sigs);
 
       await this.contract.registerByAgent(
         testHash,
