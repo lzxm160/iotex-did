@@ -4,7 +4,9 @@ const IoTeXDID = artifacts.require(
 
 contract("AddressBasedDIDManagerWithAgentEnabled", function (accounts) {
   beforeEach(async function () {
-    this.contract = await IoTeXDID.new();
+    var str = "did:io:";
+    const zeroaddr = "0x0000000000000000000000000000000000000000";
+    this.contract = await IoTeXDID.new(str.getBytes(), zeroaddr);
   });
   describe("create did", function () {
     it("success", async function () {
