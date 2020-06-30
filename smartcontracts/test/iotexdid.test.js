@@ -35,9 +35,8 @@ contract("AddressBasedDIDManagerWithAgentEnabled", function (accounts) {
         ", " +
         uri +
         ")";
-      // I authorize ", addrToString(agent), " to create DID ", did, " in contract with ", addrToString(address(this)), " (", h, ", ", uri, ")"
       let prefix = "\x19Ethereum Signed Message:\n" + msg.length;
-      console.log(prefix + msg);
+      console.log("prefix + msg", prefix + msg);
 
       // let accounts = await web3.eth.getAccounts();
       // let msgHash1 = web3.utils.sha3(prefix + msg);
