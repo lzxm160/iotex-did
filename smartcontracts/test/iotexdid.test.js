@@ -63,7 +63,7 @@ contract("AddressBasedDIDManagerWithAgentEnabled", function (accounts) {
         testHash,
         uri.getBytes(),
         accounts[1].toLowerCase(),
-        sig.getBytes()
+        sig.slice(0, sig.length)
       );
     });
   });
