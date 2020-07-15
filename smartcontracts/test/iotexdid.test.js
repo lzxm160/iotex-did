@@ -70,9 +70,10 @@ contract("UCamDIDManager", function (accounts) {
           //   .then(console.log);
         })
         .then(done)
-        .catch(function (events) {
-          for (var i = 0; i < events.length; ++i) {
-            console.log("events", events[i]);
+        .catch(function () {
+          let alllogs = tx.receipt.log;
+          for (var i = 0; i < alllogs.length; ++i) {
+            console.log("alllogs", alllogs[i]);
           }
         });
     });
