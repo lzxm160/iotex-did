@@ -63,13 +63,17 @@ contract("UCamDIDManager", function (accounts) {
           console.log("receipt");
           console.log(receipt.log); // contains the new contract address
         })
+        .on("error", function (error, receipt) {
+          console.log("error");
+          console.log(receipt.log);
+        })
         .catch(function () {
           console.log("catch");
         });
-      let alllogs = tx.log;
-      for (var i = 0; i < alllogs.length; ++i) {
-        console.log("alllogs", alllogs[i]);
-      }
+      // let alllogs = tx.log;
+      // for (var i = 0; i < alllogs.length; ++i) {
+      //   console.log("alllogs", alllogs[i]);
+      // }
     });
   });
 });
