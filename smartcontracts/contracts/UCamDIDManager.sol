@@ -9,7 +9,7 @@ contract UCamDIDManager is Agentable, DIDManagerBase {
 
     function formDID(bytes20 uid) internal view returns (bytes memory) {
         // TODO: convert uid to string
-        return abi.encodePacked(db.getPrefix(), addrToString(uid));
+        return abi.encodePacked(db.getPrefix(), bytes20ToString(uid));
     }
 
     function decodeInternalKey(bytes memory did) public view returns (bytes20) {
@@ -61,7 +61,7 @@ contract UCamDIDManager is Agentable, DIDManagerBase {
         internalDeleteDID(did, uid, authorizer);
     }
 
-    function addrToString(address _addr) internal pure returns(string memory) {
+    function bytes20ToString(bytes20 _addr) internal pure returns(string memory) {
         bytes32 value = bytes32(uint256(_addr));
         bytes memory alphabet = "0123456789abcdef";
 
