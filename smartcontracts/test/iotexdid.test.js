@@ -63,6 +63,9 @@ contract("UCamDIDManager", function (accounts) {
       for (var i = 0; i < alllogs.length; ++i) {
         console.log("alllogs", alllogs[i]);
       }
+      this.contract
+        .getPastEvents("allEvents", { fromBlock: 0, toBlock: "latest" })
+        .then(console.log);
     });
   });
 });
