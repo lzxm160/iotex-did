@@ -22,7 +22,7 @@ contract("UCamDIDManager", function (accounts) {
         this.contract.address.toLowerCase()
       );
       let uri = "s3://iotex-did/documents";
-      let did = "did:io:ucam" + accounts[1].toLowerCase();
+      let did = "did:io:ucam:" + accounts[1].toLowerCase();
       // "I authorize ", addrToString(agent), " to create DID ", did, " in contract with ", addrToString(address(this)), " (", h, ", ", uri, ")"
       let msg =
         "I authorize " +

@@ -5,7 +5,7 @@ import './DIDManagerBase.sol';
 
 contract UCamDIDManager is Agentable, DIDManagerBase {
 
-    constructor(address _dbAddr) DIDBase(_dbAddr, "did:io:ucam") public {}
+    constructor(address _dbAddr) DIDBase(_dbAddr, "did:io:ucam:") public {}
 
     function formDID(bytes20 uid) internal view returns (bytes memory) {
         // TODO: convert uid to string
