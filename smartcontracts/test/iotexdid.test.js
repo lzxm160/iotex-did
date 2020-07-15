@@ -8,9 +8,7 @@ contract("UCamDIDManager", function (accounts) {
     }
     return bytes;
   };
-  // console.log(bin2string("xx".getBytes()));
   beforeEach(async function () {
-    // var str = "did:io:ucam";
     const zeroaddr = "0x0000000000000000000000000000000000000000";
     this.contract = await IoTeXDID.new(zeroaddr);
   });
@@ -53,7 +51,7 @@ contract("UCamDIDManager", function (accounts) {
       console.log();
       let tx = await this.contract
         .createDIDByAgent(
-          web3.utils.hexToBytes(accounts[1].toLowerCase()),
+          accounts[1],
           web3.utils.hexToBytes(testHash),
           uri.getBytes(),
           accounts[1],
