@@ -1,8 +1,6 @@
-const IoTeXDID = artifacts.require(
-  "AddressBasedDIDManagerWithAgentEnabled.sol"
-);
+const IoTeXDID = artifacts.require("UCamDIDManager.sol");
 
-contract("AddressBasedDIDManagerWithAgentEnabled", function (accounts) {
+contract("UCamDIDManager", function (accounts) {
   String.prototype.getBytes = function () {
     var bytes = [];
     for (var i = 0; i < this.length; ++i) {
@@ -11,13 +9,12 @@ contract("AddressBasedDIDManagerWithAgentEnabled", function (accounts) {
     return bytes;
   };
   beforeEach(async function () {
-    var str = "did:io:";
+    var str = "did:io:ucam";
     const zeroaddr = "0x0000000000000000000000000000000000000000";
-    this.contract = await IoTeXDID.new(str.getBytes(), zeroaddr);
+    this.contract = await IoTeXDID.new(zeroaddr);
   });
   describe("create did", function () {
     it("success", async function () {
-      // let hash = 0x414efa99dfac6f4095d6954713fb0085268d400d6a05a8ae8a69b5b1c10b4bed;
       let testHash = web3.utils.sha3("test");
       console.log("testHash", testHash);
       console.log(
@@ -25,7 +22,8 @@ contract("AddressBasedDIDManagerWithAgentEnabled", function (accounts) {
         this.contract.address.toLowerCase()
       );
       let uri = "s3://iotex-did/documents";
-      let did = "did:io:" + accounts[1].toLowerCase();
+      let did = "did:io:ucam" + accounts[1].toLowerCase();
+      // "I authorize ", addrToString(agent), " to create DID ", did, " in contract with ", addrToString(address(this)), " (", h, ", ", uri, ")"
       let msg =
         "I authorize " +
         accounts[0].toLowerCase() +
@@ -61,11 +59,15 @@ contract("AddressBasedDIDManagerWithAgentEnabled", function (accounts) {
 
       // let sigs = sig.signature;
       // console.log("sigs", sigs);
+      console.log("accounts[0].toLowerCase()", accounts[0].toLowerCase());
+      console.log("accounts[1].toLowerCase()", accounts[1].toLowerCase());
+
       console.log("sig", sig.slice(2, sig.byteLength));
-      await this.contract.registerByAgent(
+      await this.contract.createDIDByAgent(
+        accounts[1].toLowerCase(),
         testHash,
         uri.getBytes(),
-        accounts[1].toLowerCase(),
+        accounts[0].toLowerCase(),
         sig.slice(2, sig.byteLength).getBytes()
       );
     });
