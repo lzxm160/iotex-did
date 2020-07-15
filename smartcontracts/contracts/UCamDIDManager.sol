@@ -42,7 +42,7 @@ contract UCamDIDManager is Agentable, DIDManagerBase {
         emit hash(h);
         emit didmsg(did);
         emit register(getSigner(getCreateAuthMessage(did, h, uri, msg.sender), auth));
-        emit authMsg(getCreateAuthMessage(did, h, uri, msg.sender), auth));
+        emit authMsg(getCreateAuthMessage(did, h, uri, msg.sender));
         require(authorizer == getSigner(getCreateAuthMessage(did, h, uri, msg.sender), auth), "invalid signature");
         internalCreateDID(did, uid, authorizer, h, uri);
     }
