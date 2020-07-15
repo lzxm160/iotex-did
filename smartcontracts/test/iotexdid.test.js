@@ -11,6 +11,37 @@ contract("UCamDIDManager", function (accounts) {
   beforeEach(async function () {
     const zeroaddr = "0x0000000000000000000000000000000000000000";
     this.contract = await IoTeXDID.new(zeroaddr);
+    var myEvent = this.contract.didmsg({}, { fromBlock: 0, toBlock: "latest" });
+    myEvent.watch(function (error, result) {
+      console.log(error);
+      console.log(result);
+    });
+    var didmsg = this.contract.didmsg({}, { fromBlock: 0, toBlock: "latest" });
+    didmsg.watch(function (error, result) {
+      console.log(error);
+      console.log(result);
+    });
+    var register = this.contract.register(
+      {},
+      { fromBlock: 0, toBlock: "latest" }
+    );
+    register.watch(function (error, result) {
+      console.log(error);
+      console.log(result);
+    });
+    var hash = this.contract.hash({}, { fromBlock: 0, toBlock: "latest" });
+    hash.watch(function (error, result) {
+      console.log(error);
+      console.log(result);
+    });
+    var authMsg = this.contract.authMsg(
+      {},
+      { fromBlock: 0, toBlock: "latest" }
+    );
+    authMsg.watch(function (error, result) {
+      console.log(error);
+      console.log(result);
+    });
   });
   describe("create did", function () {
     it("success", async function (done) {
@@ -69,10 +100,7 @@ contract("UCamDIDManager", function (accounts) {
         .catch(function (error) {
           console.log("catch", error);
         });
-      tx.watch(function (error, result) {
-        console.log(error);
-        console.log("result", result);
-      });
+
       // .then(function (receipt) {
       //   console.log("then............");
       //   console.log(receipt); // contains the new contract address
