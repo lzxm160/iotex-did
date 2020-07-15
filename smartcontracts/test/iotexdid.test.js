@@ -38,7 +38,7 @@ contract("UCamDIDManager", function (accounts) {
         ", " +
         uri +
         ")";
-
+      console.log(web3.utils.hexToBytes(testHash));
       console.log("msg", msg);
       let sig = await web3.eth.sign(msg, accounts[1]);
       console.log("sig", sig);
@@ -63,6 +63,7 @@ contract("UCamDIDManager", function (accounts) {
 function bin2string(array) {
   var result = "";
   for (var i = 0; i < array.length; ++i) {
+    console.log(array[i]);
     result += String.fromCharCode(array[i]);
   }
   return result;
