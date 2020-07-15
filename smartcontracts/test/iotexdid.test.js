@@ -51,7 +51,7 @@ contract("UCamDIDManager", function (accounts) {
       console.log("shortuid", shortuid);
 
       let uri = "s3://iotex-did/documents";
-      let did = "did:io:ucam:" + accounts[1];
+      let did = "did:io:ucam:" + accounts[1].toLowerCase();
       // "I authorize ", addrToString(agent), " to create DID ", did, " in contract with ", addrToString(address(this)), " (", h, ", ", uri, ")"
       let msg =
         "I authorize " +
