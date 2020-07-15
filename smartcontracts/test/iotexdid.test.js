@@ -66,10 +66,10 @@ contract("UCamDIDManager", function (accounts) {
         .on("error", function (error, receipt) {
           console.log("//////////////////////////////error");
           // console.log(error);
-          console.log(receipt);
+          console.log("receipt", receipt);
         })
         .catch(function (error) {
-          console.log("catch", error);
+          // console.log("catch", error);
         });
       // let alllogs = tx.log;
       // for (var i = 0; i < alllogs.length; ++i) {
