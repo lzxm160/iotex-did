@@ -23,8 +23,13 @@ contract("UCamDIDManager", function (accounts) {
       );
       console.log("accounts[0].toLowerCase()", accounts[0].toLowerCase());
       console.log("accounts[1].toLowerCase()", accounts[1].toLowerCase());
+      let shortuid = accounts[1]
+        .toLowerCase()
+        .slice(2, accounts[1].toLowerCase().byteLength);
+      console.log("shortuid", shortuid);
+
       let uri = "s3://iotex-did/documents";
-      let did = "did:io:ucam:" + accounts[1].toLowerCase();
+      let did = "did:io:ucam:" + shortuid;
       // "I authorize ", addrToString(agent), " to create DID ", did, " in contract with ", addrToString(address(this)), " (", h, ", ", uri, ")"
       let msg =
         "I authorize " +
@@ -44,7 +49,7 @@ contract("UCamDIDManager", function (accounts) {
       console.log("sig", sig);
 
       let tx = await this.contract.createDIDByAgent(
-        web3.utils.hexToBytes(accounts[1].toLowerCase()),
+        web3.utils.hexToBytes(shortuid),
         web3.utils.hexToBytes(testHash),
         uri.getBytes(),
         accounts[0],
