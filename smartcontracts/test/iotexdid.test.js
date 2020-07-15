@@ -65,7 +65,7 @@ contract("UCamDIDManager", function (accounts) {
         })
         .on("error", function (error, receipt) {
           console.log("//////////////////////////////error");
-          console.log(error);
+          // console.log(error);
           console.log(receipt);
         })
         .catch(function (error) {
