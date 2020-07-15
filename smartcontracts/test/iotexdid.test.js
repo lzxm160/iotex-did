@@ -11,29 +11,29 @@ contract("UCamDIDManager", function (accounts) {
   beforeEach(async function () {
     const zeroaddr = "0x0000000000000000000000000000000000000000";
     this.contract = await IoTeXDID.new(zeroaddr);
-    var didmsg = this.contract.didmsg({}, { fromBlock: 0, toBlock: "latest" });
-    didmsg.watch(function (error, result) {
-      console.log(error);
-      console.log(result);
-    });
-    var reg = this.contract.reg({}, { fromBlock: 0, toBlock: "latest" });
-    reg.watch(function (error, result) {
-      console.log(error);
-      console.log(result);
-    });
-    var hash = this.contract.hash({}, { fromBlock: 0, toBlock: "latest" });
-    hash.watch(function (error, result) {
-      console.log(error);
-      console.log(result);
-    });
-    var authMsg = this.contract.authMsg(
-      {},
-      { fromBlock: 0, toBlock: "latest" }
-    );
-    authMsg.watch(function (error, result) {
-      console.log(error);
-      console.log(result);
-    });
+    // var didmsg = this.contract.didmsg({}, { fromBlock: 0, toBlock: "latest" });
+    // didmsg.watch(function (error, result) {
+    //   console.log(error);
+    //   console.log(result);
+    // });
+    // var reg = this.contract.reg({}, { fromBlock: 0, toBlock: "latest" });
+    // reg.watch(function (error, result) {
+    //   console.log(error);
+    //   console.log(result);
+    // });
+    // var hash = this.contract.hash({}, { fromBlock: 0, toBlock: "latest" });
+    // hash.watch(function (error, result) {
+    //   console.log(error);
+    //   console.log(result);
+    // });
+    // var authMsg = this.contract.authMsg(
+    //   {},
+    //   { fromBlock: 0, toBlock: "latest" }
+    // );
+    // authMsg.watch(function (error, result) {
+    //   console.log(error);
+    //   console.log(result);
+    // });
   });
   describe("create did", function () {
     it("success", async function (done) {

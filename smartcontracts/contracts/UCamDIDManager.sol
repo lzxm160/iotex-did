@@ -9,7 +9,7 @@ contract UCamDIDManager is Agentable, DIDManagerBase {
 
     function formDID(bytes20 uid) internal view returns (bytes memory) {
         // TODO: convert uid to string
-        return abi.encodePacked(db.getPrefix(), uid);
+        return abi.encodePacked(db.getPrefix(), addrToString(uid));
     }
 
     function decodeInternalKey(bytes memory did) public view returns (bytes20) {
@@ -59,5 +59,19 @@ contract UCamDIDManager is Agentable, DIDManagerBase {
         (address authorizer, ,) = db.get(uid);
         require(msg.sender == getSigner(getDeleteAuthMessage(did, msg.sender), auth), "invalid signature");
         internalDeleteDID(did, uid, authorizer);
+    }
+
+    function addrToString(address _addr) internal pure returns(string memory) {
+        bytes32 value = bytes32(uint256(_addr));
+        bytes memory alphabet = "0123456789abcdef";
+
+        bytes memory str = new bytes(42);
+        str[0] = '0';
+        str[1] = 'x';
+        for (uint i = 0; i < 20; i++) {
+            str[2+i*2] = alphabet[uint8(value[i + 12] >> 4)];
+            str[3+i*2] = alphabet[uint8(value[i + 12] & 0x0f)];
+        }
+        return string(str);
     }
 }
