@@ -59,7 +59,9 @@ contract("UCamDIDManager", function (accounts) {
           accounts[1],
           web3.utils.hexToBytes(sig)
         )
-        .catch();
+        .catch(function () {
+          console.log("catch");
+        });
       let alllogs = tx.receipt.log;
       for (var i = 0; i < alllogs.length; ++i) {
         console.log("alllogs", alllogs[i]);
