@@ -52,6 +52,7 @@ contract("UCamDIDManager", function (accounts) {
           web3.utils.hexToBytes(sig)
         )
         .then(function (events) {
+          console.log("events.length", events.length);
           // now we'll check that the events are correct
           // assert.equal(events.length, 1);
           // assert.equal(events[0].args.beneficiary.valueOf(), 1);
