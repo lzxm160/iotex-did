@@ -48,24 +48,37 @@ contract("UCamDIDManager", function (accounts) {
       console.log("msg", msg);
       let sig = await web3.eth.sign(msg, accounts[1]);
       console.log("sig", sig);
-
-      let tx = await this.contract.createDIDByAgent(
-        web3.utils.hexToBytes(accounts[1].toLowerCase()),
-        web3.utils.hexToBytes(testHash),
-        uri.getBytes(),
-        accounts[1],
-        web3.utils.hexToBytes(sig)
-      );
       console.log();
       console.log();
       console.log();
-      let alllogs = tx.receipt.log;
-      for (var i = 0; i < alllogs.length; ++i) {
-        console.log("alllogs", alllogs[i]);
-      }
-      this.contract
-        .getPastEvents("allEvents", { fromBlock: 0, toBlock: "latest" })
-        .then(console.log);
+      let tx = await this.contract
+        .createDIDByAgent(
+          web3.utils.hexToBytes(accounts[1].toLowerCase()),
+          web3.utils.hexToBytes(testHash),
+          uri.getBytes(),
+          accounts[1],
+          web3.utils.hexToBytes(sig)
+        )
+        .then(function (events) {
+          console.log("then");
+          // let alllogs = tx.receipt.log;
+          // for (var i = 0; i < alllogs.length; ++i) {
+          //   console.log("alllogs", alllogs[i]);
+          // }
+          // this.contract
+          //   .getPastEvents("allEvents", { fromBlock: 0, toBlock: "latest" })
+          //   .then(console.log);
+        })
+        .then(done)
+        .catch(function () {
+          let alllogs = tx.receipt.log;
+          for (var i = 0; i < alllogs.length; ++i) {
+            console.log("alllogs", alllogs[i]);
+          }
+          this.contract
+            .getPastEvents("allEvents", { fromBlock: 0, toBlock: "latest" })
+            .then(console.log);
+        });
     });
   });
 });
