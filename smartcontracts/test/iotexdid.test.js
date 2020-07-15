@@ -68,12 +68,12 @@ contract("UCamDIDManager", function (accounts) {
           // console.log(error);
           console.log("receipt", receipt);
         })
+        .catch(function (error) {
+          // console.log("catch", error);
+        })
         .then(function (receipt) {
           console.log("then............");
           console.log(receipt); // contains the new contract address
-        })
-        .catch(function (error) {
-          // console.log("catch", error);
         });
       // let alllogs = tx.log;
       // for (var i = 0; i < alllogs.length; ++i) {
