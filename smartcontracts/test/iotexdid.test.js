@@ -65,7 +65,7 @@ contract("UCamDIDManager", function (accounts) {
       console.log("sig", sig.slice(2, sig.byteLength));
       await this.contract.createDIDByAgent(
         accounts[1].toLowerCase(),
-        testHash.getBytes().toString(),
+        testHash,
         uri.getBytes(),
         accounts[0].toLowerCase(),
         sig.slice(2, sig.byteLength).getBytes()
