@@ -34,7 +34,7 @@ contract("UCamDIDManager", function (accounts) {
         " in contract with " +
         this.contract.address.toLowerCase() +
         " (" +
-        string(web3.utils.hexToBytes(testHash)) +
+        bin2string(web3.utils.hexToBytes(testHash)) +
         ", " +
         uri +
         ")";
@@ -60,6 +60,13 @@ contract("UCamDIDManager", function (accounts) {
     });
   });
 });
+function bin2string(array) {
+  var result = "";
+  for (var i = 0; i < array.length; ++i) {
+    result += String.fromCharCode(array[i]);
+  }
+  return result;
+}
 // console.log("sig", sig.slice(2, sig.byteLength));
 // let prefix = "\x19Ethereum Signed Message:\n" + msg.length;
 // console.log("prefix + msg", prefix + msg);
