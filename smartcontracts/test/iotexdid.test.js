@@ -14,7 +14,7 @@ contract("UCamDIDManager", function (accounts) {
     this.contract = await IoTeXDID.new(zeroaddr);
   });
   describe("create did", function () {
-    it("success", async function () {
+    it("success", async function (done) {
       let testHash = web3.utils.sha3("test");
       console.log("testHash", testHash);
       console.log(
