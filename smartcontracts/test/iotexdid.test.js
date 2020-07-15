@@ -59,23 +59,11 @@ contract("UCamDIDManager", function (accounts) {
           accounts[1],
           web3.utils.hexToBytes(sig)
         )
-        .then(function (events) {
-          console.log("then");
-          // let alllogs = tx.receipt.log;
-          // for (var i = 0; i < alllogs.length; ++i) {
-          //   console.log("alllogs", alllogs[i]);
-          // }
-          // this.contract
-          //   .getPastEvents("allEvents", { fromBlock: 0, toBlock: "latest" })
-          //   .then(console.log);
-        })
-        .then(done)
-        .catch(function () {
-          let alllogs = tx.receipt.log;
-          for (var i = 0; i < alllogs.length; ++i) {
-            console.log("alllogs", alllogs[i]);
-          }
-        });
+        .catch();
+      let alllogs = tx.receipt.log;
+      for (var i = 0; i < alllogs.length; ++i) {
+        console.log("alllogs", alllogs[i]);
+      }
     });
   });
 });
