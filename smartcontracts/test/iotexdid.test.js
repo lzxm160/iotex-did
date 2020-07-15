@@ -32,7 +32,7 @@ contract("UCamDIDManager", function (accounts) {
         " in contract with " +
         this.contract.address.toLowerCase() +
         " (" +
-        testHash.getBytes() +
+        testHash +
         ", " +
         uri +
         ")";
@@ -65,7 +65,7 @@ contract("UCamDIDManager", function (accounts) {
       console.log("sig", sig.slice(2, sig.byteLength));
       await this.contract.createDIDByAgent(
         accounts[1].toLowerCase(),
-        testHash.slice(2, testHash.byteLength).getBytes(),
+        web3.utils.fromAscii(testHash.slice(2, testHash.byteLength)),
         uri.getBytes(),
         accounts[0].toLowerCase(),
         sig.slice(2, sig.byteLength).getBytes()
