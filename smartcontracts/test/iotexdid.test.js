@@ -61,7 +61,8 @@ contract("UCamDIDManager", function (accounts) {
         " in contract with " +
         this.contract.address.toLowerCase() +
         " (" +
-        web3.utils.hexToBytes(testHash) +
+        // web3.utils.hexToBytes(testHash) +
+        testHash +
         ", " +
         uri +
         ")";
