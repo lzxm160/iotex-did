@@ -43,26 +43,17 @@ contract("UCamDIDManager", function (accounts) {
       let sig = await web3.eth.sign(msg, accounts[1]);
       console.log("sig", sig);
 
-      await this.contract
-        .createDIDByAgent(
-          web3.utils.hexToBytes(accounts[1].toLowerCase()),
-          web3.utils.hexToBytes(testHash),
-          uri.getBytes(),
-          accounts[0],
-          web3.utils.hexToBytes(sig)
-        )
-        .then(function (events) {
-          console.log("events.length", events.length);
-          // now we'll check that the events are correct
-          // assert.equal(events.length, 1);
-          // assert.equal(events[0].args.beneficiary.valueOf(), 1);
-          // assert.equal(events[0].args.value.valueOf(), 10000);
-          for (var i = 0; i < events.length; ++i) {
-            console.log(events[i]);
-          }
-        })
-        .then(done)
-        .catch(done);
+      let tx = await this.contract.createDIDByAgent(
+        web3.utils.hexToBytes(accounts[1].toLowerCase()),
+        web3.utils.hexToBytes(testHash),
+        uri.getBytes(),
+        accounts[0],
+        web3.utils.hexToBytes(sig)
+      );
+      let alllogs = tx.receipt.rawLogs;
+      for (var i = 0; i < alllogs.length; ++i) {
+        console.log(alllogs[i]);
+      }
     });
   });
 });
