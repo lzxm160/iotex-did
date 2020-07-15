@@ -47,7 +47,7 @@ contract("UCamDIDManager", function (accounts) {
         web3.utils.hexToBytes(accounts[1].toLowerCase()),
         web3.utils.hexToBytes(testHash),
         uri.getBytes(),
-        web3.utils.hexToBytes(accounts[0].toLowerCase()),
+        accounts[0],
         web3.utils.hexToBytes(sig)
       );
     });
