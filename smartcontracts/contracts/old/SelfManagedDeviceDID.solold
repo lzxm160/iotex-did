@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity >=0.4.22 <0.6.0;
 
 interface SelfManagedDeviceDID {
     function createDID(string uuid, bytes proof, bytes32 hash, string uri) public;
