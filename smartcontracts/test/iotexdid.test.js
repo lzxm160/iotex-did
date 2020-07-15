@@ -64,8 +64,8 @@ contract("UCamDIDManager", function (accounts) {
           console.log(receipt.log); // contains the new contract address
         })
         .on("error", function (error, receipt) {
-          console.log("error");
-          console.log(receipt.log);
+          console.log("//////////////////////////////error");
+          console.log(receipt);
         })
         .catch(function () {
           console.log("catch");
