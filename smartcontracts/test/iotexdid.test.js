@@ -59,7 +59,7 @@ contract("UCamDIDManager", function (accounts) {
       console.log();
       console.log();
       console.log();
-      let alllogs = tx.receipt.rawLogs;
+      let alllogs = tx.receipt.log;
       for (var i = 0; i < alllogs.length; ++i) {
         console.log("alllogs", alllogs[i]);
       }
