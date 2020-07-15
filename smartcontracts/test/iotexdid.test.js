@@ -34,7 +34,7 @@ contract("UCamDIDManager", function (accounts) {
         " in contract with " +
         this.contract.address.toLowerCase() +
         " (" +
-        testHash.slice(2, testHash.byteLength) +
+        string(web3.utils.hexToBytes(testHash)) +
         ", " +
         uri +
         ")";
@@ -50,6 +50,9 @@ contract("UCamDIDManager", function (accounts) {
         accounts[0],
         web3.utils.hexToBytes(sig)
       );
+      console.log();
+      console.log();
+      console.log();
       let alllogs = tx.receipt.rawLogs;
       for (var i = 0; i < alllogs.length; ++i) {
         console.log("alllogs", alllogs[i]);
