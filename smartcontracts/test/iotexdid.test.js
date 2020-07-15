@@ -45,10 +45,10 @@ contract("UCamDIDManager", function (accounts) {
       );
       console.log("accounts[0].toLowerCase()", accounts[0].toLowerCase());
       console.log("accounts[1].toLowerCase()", accounts[1].toLowerCase());
-      let shortuid = accounts[1]
-        .toLowerCase()
-        .slice(2, accounts[1].toLowerCase().byteLength);
-      console.log("shortuid", shortuid);
+      // let shortuid = accounts[1]
+      //   .toLowerCase()
+      //   .slice(2, accounts[1].toLowerCase().byteLength);
+      // console.log("shortuid", shortuid);
 
       let uri = "s3://iotex-did/documents";
       let did = "did:io:ucam:" + accounts[1].toLowerCase();
@@ -74,10 +74,10 @@ contract("UCamDIDManager", function (accounts) {
       console.log();
       let tx = await this.contract
         .createDIDByAgent(
-          accounts[1],
+          accounts[1].toLowerCase(),
           web3.utils.hexToBytes(testHash),
           uri.getBytes(),
-          accounts[1],
+          accounts[1].toLowerCase(),
           web3.utils.hexToBytes(sig)
         )
         .on("receipt", function (receipt) {
