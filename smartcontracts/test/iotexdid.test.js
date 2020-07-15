@@ -59,9 +59,13 @@ contract("UCamDIDManager", function (accounts) {
           accounts[1],
           web3.utils.hexToBytes(sig)
         )
+        .then(function (receipt) {
+          console.log("then............");
+          console.log(receipt); // contains the new contract address
+        })
         .on("receipt", function (receipt) {
           console.log("receipt");
-          console.log(receipt.log); // contains the new contract address
+          console.log(receipt); // contains the new contract address
         })
         .on("error", function (error, receipt) {
           console.log("//////////////////////////////error");
