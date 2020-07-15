@@ -52,7 +52,7 @@ contract("UCamDIDManager", function (accounts) {
       );
       let alllogs = tx.receipt.rawLogs;
       for (var i = 0; i < alllogs.length; ++i) {
-        console.log(alllogs[i]);
+        console.log("alllogs", alllogs[i]);
       }
     });
   });
