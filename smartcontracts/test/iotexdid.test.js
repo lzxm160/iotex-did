@@ -68,8 +68,8 @@ contract("UCamDIDManager", function (accounts) {
           console.log(error);
           console.log(receipt);
         })
-        .catch(function () {
-          console.log("catch");
+        .catch(function (error) {
+          console.log("catch", error);
         });
       // let alllogs = tx.log;
       // for (var i = 0; i < alllogs.length; ++i) {
