@@ -59,10 +59,14 @@ contract("UCamDIDManager", function (accounts) {
           accounts[1],
           web3.utils.hexToBytes(sig)
         )
+        .on("receipt", function (receipt) {
+          console.log("receipt");
+          console.log(receipt.log); // contains the new contract address
+        })
         .catch(function () {
           console.log("catch");
         });
-      let alllogs = tx.receipt.log;
+      let alllogs = tx.log;
       for (var i = 0; i < alllogs.length; ++i) {
         console.log("alllogs", alllogs[i]);
       }
