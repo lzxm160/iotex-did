@@ -11,21 +11,13 @@ contract("UCamDIDManager", function (accounts) {
   beforeEach(async function () {
     const zeroaddr = "0x0000000000000000000000000000000000000000";
     this.contract = await IoTeXDID.new(zeroaddr);
-    var myEvent = this.contract.didmsg({}, { fromBlock: 0, toBlock: "latest" });
-    myEvent.watch(function (error, result) {
-      console.log(error);
-      console.log(result);
-    });
     var didmsg = this.contract.didmsg({}, { fromBlock: 0, toBlock: "latest" });
     didmsg.watch(function (error, result) {
       console.log(error);
       console.log(result);
     });
-    var register = this.contract.register(
-      {},
-      { fromBlock: 0, toBlock: "latest" }
-    );
-    register.watch(function (error, result) {
+    var reg = this.contract.reg({}, { fromBlock: 0, toBlock: "latest" });
+    reg.watch(function (error, result) {
       console.log(error);
       console.log(result);
     });
