@@ -11,7 +11,10 @@ contract("UCamDIDManager", function (accounts) {
   beforeEach(async function () {
     const zeroaddr = "0x0000000000000000000000000000000000000000";
     this.contract = await IoTeXDID.new(zeroaddr);
-    var myEvent = this.contract.MyEvent({ fromBlock: 0, toBlock: "latest" });
+    var myEvent = this.contract.createDIDByAgent({
+      fromBlock: 0,
+      toBlock: "latest",
+    });
     myEvent.watch(function (error, result) {
       console.log(error);
       console.log("result", result);
