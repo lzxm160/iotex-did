@@ -33,11 +33,16 @@ contract UCamDIDManager is Agentable, DIDManagerBase {
         }
         return bytes20(uid);
     }
-
+    event didmsg(bytes msg);
     event register(address authorizer);
+    event hash(bytes32 msg);
+    event authMsg(bytes msg);
     function createDIDByAgent(bytes20 uid, bytes32 h, bytes memory uri, address authorizer, bytes memory auth) public {
         bytes memory did = formDID(uid);
+        emit hash(h);
+        emit didmsg(did);
         emit register(getSigner(getCreateAuthMessage(did, h, uri, msg.sender), auth));
+        emit authMsg(getCreateAuthMessage(did, h, uri, msg.sender), auth));
         require(authorizer == getSigner(getCreateAuthMessage(did, h, uri, msg.sender), auth), "invalid signature");
         internalCreateDID(did, uid, authorizer, h, uri);
     }
