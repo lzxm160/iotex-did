@@ -49,7 +49,7 @@ contract("UCamDIDManager", function (accounts) {
       console.log("sig", sig);
 
       let tx = await this.contract.createDIDByAgent(
-        web3.utils.hexToBytes(shortuid),
+        web3.utils.hexToBytes(accounts[1].toLowerCase()),
         web3.utils.hexToBytes(testHash),
         uri.getBytes(),
         accounts[0],
