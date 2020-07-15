@@ -28,7 +28,7 @@ contract("UCamDIDManager", function (accounts) {
       console.log("shortuid", shortuid);
 
       let uri = "s3://iotex-did/documents";
-      let did = "did:io:ucam:" + shortuid;
+      let did = "did:io:ucam:" + accounts[1];
       // "I authorize ", addrToString(agent), " to create DID ", did, " in contract with ", addrToString(address(this)), " (", h, ", ", uri, ")"
       let msg =
         "I authorize " +
@@ -68,11 +68,11 @@ contract("UCamDIDManager", function (accounts) {
         })
         .catch(function (error) {
           console.log("catch", error);
-        })
-        .then(function (receipt) {
-          console.log("then............");
-          console.log(receipt); // contains the new contract address
         });
+      // .then(function (receipt) {
+      //   console.log("then............");
+      //   console.log(receipt); // contains the new contract address
+      // });
       // let alllogs = tx.log;
       // for (var i = 0; i < alllogs.length; ++i) {
       //   console.log("alllogs", alllogs[i]);
@@ -80,14 +80,14 @@ contract("UCamDIDManager", function (accounts) {
     });
   });
 });
-function bin2string(array) {
-  var result = "";
-  for (var i = 0; i < array.length; ++i) {
-    console.log(array[i]);
-    result += String.fromCharCode(array[i]);
-  }
-  return result;
-}
+// function bin2string(array) {
+//   var result = "";
+//   for (var i = 0; i < array.length; ++i) {
+//     console.log(array[i]);
+//     result += String.fromCharCode(array[i]);
+//   }
+//   return result;
+// }
 // console.log("sig", sig.slice(2, sig.byteLength));
 // let prefix = "\x19Ethereum Signed Message:\n" + msg.length;
 // console.log("prefix + msg", prefix + msg);
