@@ -67,32 +67,38 @@ contract("UCamDIDManager", function (accounts) {
           console.log("receipt");
           console.log(receipt); // contains the new contract address
         })
-        // .on("error", function (error, receipt) {
-        // console.log("//////////////////////////////error");
-        // console.log(error);
-        // console.log("receipt", receipt);
-        // })
+
         .catch(function (error) {
           console.log("catch", error);
         });
-      // this.contract
-      //   .getPastEvents(
-      //     "authMsg",
-      //     {
-      //       filter: {},
-      //       fromBlock: 0,
-      //       toBlock: "latest",
-      //     },
-      //     function (error, events) {
-      //       console.log(events);
-      //     }
-      //   )
-      //   .then(function (events) {
-      //     console.log(events); // same results as the optional callback above
-      //   });
+      let testsig = await web3.eth.sign("msg", accounts[1]);
+      console.log("testsig", testsig);
+      web3.eth.personal.ecRecover("msg", testsig).then(console.log);
     });
   });
 });
+
+// .on("error", function (error, receipt) {
+// console.log("//////////////////////////////error");
+// console.log(error);
+// console.log("receipt", receipt);
+// })
+// this.contract
+//   .getPastEvents(
+//     "authMsg",
+//     {
+//       filter: {},
+//       fromBlock: 0,
+//       toBlock: "latest",
+//     },
+//     function (error, events) {
+//       console.log(events);
+//     }
+//   )
+//   .then(function (events) {
+//     console.log(events); // same results as the optional callback above
+//   });
+
 // function unpack(str) {
 //   var bytes = [];
 //   for (var i = 0; i < str.length; i++) {
