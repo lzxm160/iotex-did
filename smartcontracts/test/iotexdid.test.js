@@ -57,10 +57,10 @@ contract("UCamDIDManager", function (accounts) {
       console.log();
       let tx = await this.contract
         .createDIDByAgent(
-          web3.utils.hexToBytes(accounts[1]),
+          web3.utils.hexToBytes(accounts[1].toLowerCase()),
           web3.utils.hexToBytes(testHash),
           web3.utils.hexToBytes(web3.utils.asciiToHex(uri)),
-          accounts[1],
+          accounts[1].toLowerCase(),
           web3.utils.hexToBytes(sig)
         )
         .on("receipt", function (receipt) {
@@ -93,15 +93,15 @@ contract("UCamDIDManager", function (accounts) {
     });
   });
 });
-function unpack(str) {
-  var bytes = [];
-  for (var i = 0; i < str.length; i++) {
-    var char = str.charCodeAt(i);
-    bytes.push(char >>> 8);
-    bytes.push(char & 0xff);
-  }
-  return bytes;
-}
+// function unpack(str) {
+//   var bytes = [];
+//   for (var i = 0; i < str.length; i++) {
+//     var char = str.charCodeAt(i);
+//     bytes.push(char >>> 8);
+//     bytes.push(char & 0xff);
+//   }
+//   return bytes;
+// }
 // let alllogs = tx.receipt.log;
 // for (var i = 0; i < alllogs.length; ++i) {
 //   console.log("alllogs", alllogs[i]);
