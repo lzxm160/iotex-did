@@ -68,7 +68,11 @@ contract("UCamDIDManager", function (accounts) {
         ")";
       console.log(web3.utils.hexToBytes(testHash));
       console.log("msg", msg);
-      console.log("uri", web3.utils.hexToBytes(web3.utils.asciiToHex(uri)));
+      console.log("uri asciiToHex", web3.utils.asciiToHex(uri));
+      console.log(
+        "uri hexToBytes",
+        web3.utils.hexToBytes(web3.utils.asciiToHex(uri))
+      );
       let sig = await web3.eth.sign(msg, accounts[1]);
       console.log("sig", sig);
       console.log();
