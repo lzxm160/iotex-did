@@ -93,15 +93,10 @@ contract("UCamDIDManager", function (accounts) {
         .catch(function (error) {
           console.log("catch", error);
         });
-
-      // .then(function (receipt) {
-      //   console.log("then............");
-      //   console.log(receipt); // contains the new contract address
-      // });
-      // let alllogs = tx.log;
-      // for (var i = 0; i < alllogs.length; ++i) {
-      //   console.log("alllogs", alllogs[i]);
-      // }
+      let alllogs = tx.receipt.log;
+      for (var i = 0; i < alllogs.length; ++i) {
+        console.log("alllogs", alllogs[i]);
+      }
     });
   });
 });
@@ -114,6 +109,15 @@ function unpack(str) {
   }
   return bytes;
 }
+
+// .then(function (receipt) {
+//   console.log("then............");
+//   console.log(receipt); // contains the new contract address
+// });
+// let alllogs = tx.log;
+// for (var i = 0; i < alllogs.length; ++i) {
+//   console.log("alllogs", alllogs[i]);
+// }
 // function bin2string(array) {
 //   var result = "";
 //   for (var i = 0; i < array.length; ++i) {
