@@ -93,21 +93,21 @@ contract("UCamDIDManager", function (accounts) {
         .catch(function (error) {
           console.log("catch", error);
         });
-      this.contract
-        .getPastEvents(
-          "authMsg",
-          {
-            filter: {},
-            fromBlock: 0,
-            toBlock: "latest",
-          },
-          function (error, events) {
-            console.log(events);
-          }
-        )
-        .then(function (events) {
-          console.log(events); // same results as the optional callback above
-        });
+      // this.contract
+      //   .getPastEvents(
+      //     "authMsg",
+      //     {
+      //       filter: {},
+      //       fromBlock: 0,
+      //       toBlock: "latest",
+      //     },
+      //     function (error, events) {
+      //       console.log(events);
+      //     }
+      //   )
+      //   .then(function (events) {
+      //     console.log(events); // same results as the optional callback above
+      //   });
     });
   });
 });
