@@ -77,7 +77,7 @@ contract("UCamDIDManager", function (accounts) {
         .createDIDByAgent(
           web3.utils.hexToBytes(accounts[1].toLowerCase()),
           web3.utils.hexToBytes(testHash),
-          uri.getBytes(),
+          unpack(uri),
           accounts[1],
           web3.utils.hexToBytes(sig)
         )
@@ -105,6 +105,15 @@ contract("UCamDIDManager", function (accounts) {
     });
   });
 });
+function unpack(str) {
+  var bytes = [];
+  for (var i = 0; i < str.length; i++) {
+    var char = str.charCodeAt(i);
+    bytes.push(char >>> 8);
+    bytes.push(char & 0xff);
+  }
+  return bytes;
+}
 // function bin2string(array) {
 //   var result = "";
 //   for (var i = 0; i < array.length; ++i) {
