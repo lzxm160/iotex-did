@@ -85,11 +85,11 @@ contract("UCamDIDManager", function (accounts) {
           console.log("receipt");
           console.log(receipt); // contains the new contract address
         })
-        .on("error", function (error, receipt) {
-          console.log("//////////////////////////////error");
-          // console.log(error);
-          console.log("receipt", receipt);
-        })
+        // .on("error", function (error, receipt) {
+        // console.log("//////////////////////////////error");
+        // console.log(error);
+        // console.log("receipt", receipt);
+        // })
         .catch(function (error) {
           console.log("catch", error);
         });
