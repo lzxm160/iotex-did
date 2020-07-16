@@ -77,7 +77,7 @@ contract("UCamDIDManager", function (accounts) {
         .createDIDByAgent(
           accounts[1],
           web3.utils.hexToBytes(testHash),
-          [uri],
+          uri.getBytes(),
           accounts[1],
           web3.utils.hexToBytes(sig)
         )
