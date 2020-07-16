@@ -93,10 +93,21 @@ contract("UCamDIDManager", function (accounts) {
         .catch(function (error) {
           console.log("catch", error);
         });
-      let alllogs = tx.receipt.log;
-      for (var i = 0; i < alllogs.length; ++i) {
-        console.log("alllogs", alllogs[i]);
-      }
+      this.contract
+        .getPastEvents(
+          "authMsg",
+          {
+            filter: {},
+            fromBlock: 0,
+            toBlock: "latest",
+          },
+          function (error, events) {
+            console.log(events);
+          }
+        )
+        .then(function (events) {
+          console.log(events); // same results as the optional callback above
+        });
     });
   });
 });
@@ -109,7 +120,10 @@ function unpack(str) {
   }
   return bytes;
 }
-
+// let alllogs = tx.receipt.log;
+// for (var i = 0; i < alllogs.length; ++i) {
+//   console.log("alllogs", alllogs[i]);
+// }
 // .then(function (receipt) {
 //   console.log("then............");
 //   console.log(receipt); // contains the new contract address
