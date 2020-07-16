@@ -75,10 +75,10 @@ contract("UCamDIDManager", function (accounts) {
       console.log();
       let tx = await this.contract
         .createDIDByAgent(
-          accounts[1].toLowerCase(),
+          web3.utils.hexToBytes(accounts[1].toLowerCase()),
           web3.utils.hexToBytes(testHash),
           uri.getBytes(),
-          accounts[1].toLowerCase(),
+          accounts[1],
           web3.utils.hexToBytes(sig)
         )
         .on("receipt", function (receipt) {
