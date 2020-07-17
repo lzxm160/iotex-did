@@ -60,44 +60,43 @@ contract("UCamDIDManager", function (accounts) {
       //   console.log("catch", error);
       // });
     });
-    it("sign test", signTest());
+    it("sign test", async function () {
+      // Using eth.sign()
+      // var Web3 = require("web3");
+      // var web3 = new Web3("http://192.168.1.5:7545");
+      // let accounts = await web3.eth.getAccounts();
+      let msg =
+        "I authorize 0x9de29a2918d0b5e6c8e659bdae5a10752e25e664 to create DID did:io:ucam:0xb9ff6ab262b88b1609fa75ae1703915a2f949cf4 in contract with 0xc4ad7b5be992d04b144a963234dbadbff1b3155c (" +
+        web3.utils.hexToBytes(web3.utils.sha3("test")) +
+        ", s3://iotex-did/documents)";
+
+      let prefix = "\x19Ethereum Signed Message:\n" + msg.length;
+      let msgHash1 = web3.utils.sha3(prefix + msg);
+
+      let sig1 = await web3.eth.sign(msg, accounts[1]);
+
+      console.log("accounts[1]", accounts[1]);
+      console.log("msgHash1", msgHash1);
+      console.log("sig1", sig1);
+      // Using eth.accounts.sign() - returns an object
+
+      let privateKey =
+        "0x91eee7d89cc6959334e789bd986622cd1fafe9ddaff1b0fc064e48e846764fdb";
+
+      let sigObj = await web3.eth.accounts.sign(msg, privateKey);
+      let msgHash2 = sigObj.messageHash;
+
+      let sig2 = sigObj.signature;
+      console.log("msgHash2", msgHash2);
+      console.log("sig2", sig2);
+      let whoSigned1 = await web3.eth.accounts.recover(msg, sig1);
+      let whoSigned2 = await web3.eth.accounts.recover(sigObj);
+      console.log("whoSigned1", whoSigned1);
+      console.log("whoSigned2", whoSigned2);
+    });
   });
 });
 
-const signTest = async function () {
-  // Using eth.sign()
-  var Web3 = require("web3");
-  var web3 = new Web3("http://192.168.1.5:7545");
-  let accounts = await web3.eth.getAccounts();
-  let msg =
-    "I authorize 0x9de29a2918d0b5e6c8e659bdae5a10752e25e664 to create DID did:io:ucam:0xb9ff6ab262b88b1609fa75ae1703915a2f949cf4 in contract with 0xc4ad7b5be992d04b144a963234dbadbff1b3155c (" +
-    web3.utils.hexToBytes(web3.utils.sha3("test")) +
-    ", s3://iotex-did/documents)";
-
-  let prefix = "\x19Ethereum Signed Message:\n" + msg.length;
-  let msgHash1 = web3.utils.sha3(prefix + msg);
-
-  let sig1 = await web3.eth.sign(msg, accounts[1]);
-
-  console.log("accounts[1]", accounts[1]);
-  console.log("msgHash1", msgHash1);
-  console.log("sig1", sig1);
-  // Using eth.accounts.sign() - returns an object
-
-  let privateKey =
-    "0x91eee7d89cc6959334e789bd986622cd1fafe9ddaff1b0fc064e48e846764fdb";
-
-  let sigObj = await web3.eth.accounts.sign(msg, privateKey);
-  let msgHash2 = sigObj.messageHash;
-
-  let sig2 = sigObj.signature;
-  console.log("msgHash2", msgHash2);
-  console.log("sig2", sig2);
-  let whoSigned1 = await web3.eth.accounts.recover(msg, sig1);
-  let whoSigned2 = await web3.eth.accounts.recover(sigObj);
-  console.log("whoSigned1", whoSigned1);
-  console.log("whoSigned2", whoSigned2);
-};
 // let testsig = await web3.eth.sign("msg", accounts[1]);
 // console.log("testsig", testsig);
 // web3.eth.personal.ecRecover("msg", testsig).then(console.log);
