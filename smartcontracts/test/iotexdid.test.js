@@ -66,7 +66,8 @@ contract("UCamDIDManager", function (accounts) {
 
 const signTest = async function () {
   // Using eth.sign()
-
+  var Web3 = require("web3");
+  var web3 = new Web3("http://192.168.1.5:7545");
   let accounts = await web3.eth.getAccounts();
   let msg =
     "I authorize 0x9de29a2918d0b5e6c8e659bdae5a10752e25e664 to create DID did:io:ucam:0xb9ff6ab262b88b1609fa75ae1703915a2f949cf4 in contract with 0xc4ad7b5be992d04b144a963234dbadbff1b3155c (" +
