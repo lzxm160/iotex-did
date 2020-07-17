@@ -1,13 +1,6 @@
 const IoTeXDID = artifacts.require("UCamDIDManager.sol");
 
 contract("UCamDIDManager", function (accounts) {
-  String.prototype.getBytes = function () {
-    var bytes = [];
-    for (var i = 0; i < this.length; ++i) {
-      bytes.push(this.charCodeAt(i));
-    }
-    return bytes;
-  };
   beforeEach(async function () {
     const zeroaddr = "0x0000000000000000000000000000000000000000";
     this.contract = await IoTeXDID.new(zeroaddr);
@@ -22,10 +15,6 @@ contract("UCamDIDManager", function (accounts) {
       );
       console.log("accounts[0].toLowerCase()", accounts[0].toLowerCase());
       console.log("accounts[1].toLowerCase()", accounts[1].toLowerCase());
-      // let shortuid = accounts[1]
-      //   .toLowerCase()
-      //   .slice(2, accounts[1].toLowerCase().byteLength);
-      // console.log("shortuid", shortuid);
 
       let uri = "s3://iotex-did/documents";
       let did = "did:io:ucam:" + accounts[1].toLowerCase();
@@ -68,17 +57,28 @@ contract("UCamDIDManager", function (accounts) {
           console.log("receipt");
           console.log(receipt.rawLogs); // contains the new contract address
         })
-
         .catch(function (error) {
           console.log("catch", error);
         });
-      // let testsig = await web3.eth.sign("msg", accounts[1]);
-      // console.log("testsig", testsig);
-      // web3.eth.personal.ecRecover("msg", testsig).then(console.log);
     });
   });
 });
+// let testsig = await web3.eth.sign("msg", accounts[1]);
+// console.log("testsig", testsig);
+// web3.eth.personal.ecRecover("msg", testsig).then(console.log);
 
+// let shortuid = accounts[1]
+//   .toLowerCase()
+//   .slice(2, accounts[1].toLowerCase().byteLength);
+// console.log("shortuid", shortuid);
+
+// String.prototype.getBytes = function () {
+//   var bytes = [];
+//   for (var i = 0; i < this.length; ++i) {
+//     bytes.push(this.charCodeAt(i));
+//   }
+//   return bytes;
+// };
 // .on("error", function (error, receipt) {
 // console.log("//////////////////////////////error");
 // console.log(error);
