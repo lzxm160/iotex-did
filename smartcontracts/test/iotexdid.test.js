@@ -55,10 +55,10 @@ contract("UCamDIDManager", function (accounts) {
         .on("receipt", function (receipt) {
           console.log("receipt");
           console.log(receipt.rawLogs); // contains the new contract address
-        })
-        .catch(function (error) {
-          console.log("catch", error);
         });
+      // .catch(function (error) {
+      //   console.log("catch", error);
+      // });
     });
   });
 });
