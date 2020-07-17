@@ -39,7 +39,11 @@ contract("UCamDIDManager", function (accounts) {
         "uri hexToBytes",
         web3.utils.hexToBytes(web3.utils.asciiToHex(uri))
       );
-      let sig = await web3.eth.sign(msg, accounts[1]);
+      let privateKey =
+        "0x91eee7d89cc6959334e789bd986622cd1fafe9ddaff1b0fc064e48e846764fdb";
+      let sigObj = await web3.eth.accounts.sign(msg, privateKey);
+      sig = sigObj.signature;
+      // let sig = await web3.eth.sign(msg, accounts[1]);
       console.log("sig", sig);
       console.log();
       console.log();
