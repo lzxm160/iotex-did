@@ -62,6 +62,37 @@ contract("UCamDIDManager", function (accounts) {
     });
   });
 });
+
+const signTest = async function () {
+  // Using eth.sign()
+
+  let accounts = await web3.eth.getAccounts();
+  let msg = "Some data";
+
+  let prefix = "\x19Ethereum Signed Message:\n" + msg.length;
+  let msgHash1 = web3.utils.sha3(prefix + msg);
+
+  let sig1 = await web3.eth.sign(msg, accounts[1]);
+
+  console.log("accounts[1]", accounts[1]);
+  console.log("msgHash1", msgHash1);
+  console.log("sig1", sig1);
+  // Using eth.accounts.sign() - returns an object
+
+  let privateKey =
+    "0x91eee7d89cc6959334e789bd986622cd1fafe9ddaff1b0fc064e48e846764fdb";
+
+  let sigObj = await web3.eth.accounts.sign(msg, privateKey);
+  let msgHash2 = sigObj.messageHash;
+
+  let sig2 = sigObj.signature;
+  console.log("msgHash2", msgHash2);
+  console.log("sig2", sig2);
+  let whoSigned1 = await web3.eth.accounts.recover(msg, sig1);
+  let whoSigned2 = await web3.eth.accounts.recover(sigObj);
+  console.log("whoSigned1", whoSigned1);
+  console.log("whoSigned2", whoSigned2);
+};
 // let testsig = await web3.eth.sign("msg", accounts[1]);
 // console.log("testsig", testsig);
 // web3.eth.personal.ecRecover("msg", testsig).then(console.log);
