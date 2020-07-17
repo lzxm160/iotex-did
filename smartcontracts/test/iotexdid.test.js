@@ -72,9 +72,9 @@ contract("UCamDIDManager", function (accounts) {
         .catch(function (error) {
           console.log("catch", error);
         });
-      let testsig = await web3.eth.sign("msg", accounts[1]);
-      console.log("testsig", testsig);
-      web3.eth.personal.ecRecover("msg", testsig).then(console.log);
+      // let testsig = await web3.eth.sign("msg", accounts[1]);
+      // console.log("testsig", testsig);
+      // web3.eth.personal.ecRecover("msg", testsig).then(console.log);
     });
   });
 });
