@@ -59,8 +59,8 @@ contract("UCamDIDManager", function (accounts) {
       // .catch(function (error) {
       //   console.log("catch", error);
       // });
-      signTest().then();
     });
+    it("sign test", signTest());
   });
 });
 
