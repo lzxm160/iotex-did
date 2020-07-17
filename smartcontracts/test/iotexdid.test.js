@@ -59,7 +59,7 @@ contract("UCamDIDManager", function (accounts) {
       // .catch(function (error) {
       //   console.log("catch", error);
       // });
-      signTest();
+      signTest().then();
     });
   });
 });
@@ -68,7 +68,10 @@ const signTest = async function () {
   // Using eth.sign()
 
   let accounts = await web3.eth.getAccounts();
-  let msg = "Some data";
+  let msg =
+    "I authorize 0x9de29a2918d0b5e6c8e659bdae5a10752e25e664 to create DID did:io:ucam:0xb9ff6ab262b88b1609fa75ae1703915a2f949cf4 in contract with 0xc4ad7b5be992d04b144a963234dbadbff1b3155c (" +
+    web3.utils.hexToBytes(web3.utils.sha3("test")) +
+    ", s3://iotex-did/documents)";
 
   let prefix = "\x19Ethereum Signed Message:\n" + msg.length;
   let msgHash1 = web3.utils.sha3(prefix + msg);
