@@ -61,7 +61,8 @@ contract("UCamDIDManager", function (accounts) {
           web3.utils.hexToBytes(testHash),
           web3.utils.hexToBytes(web3.utils.asciiToHex(uri)),
           accounts[1].toLowerCase(),
-          web3.utils.hexToBytes(sig)
+          // web3.utils.hexToBytes(sig)
+          sig.toArray()
         )
         .on("receipt", function (receipt) {
           console.log("receipt");
