@@ -16,25 +16,17 @@ contract UCamDIDManager is Agentable, DIDManagerBase {
         require(hasPrefix(did, db.getPrefix()), "invalid DID");
         bytes memory domainID = (slice(did, db.getPrefix().length));
         require(domainID.length == 20, "invalid DID");
+
         uint160 uid = 0;
-        for (uint i = 0; i < 20; i++){
+        uint160 b1;
+        uint160 b2;
+        for (uint i = 0; i < 10; i += 2){
             uid *= 256;
-            uid += domainID[i];
+            b1 = uint8(domainID[i]);
+            b2 = uint8(domainID[i+1]);
+            uid += (b1*16+b2);
         }
-        return bytes20(uid);
-//        uint160 uid = 0;
-//        uint160 b1;
-//        uint160 b2;
-//        for (uint i = 0; i < 40; i += 2){
-//            uid *= 256;
-//            b1 = uint8(domainID[i]);
-//            b2 = uint8(domainID[i+1]);
-//            if ((b1 >= 97)&&(b1 <= 102)) b1 -= 87;
-//            else if ((b1 >= 65)&&(b1 <= 70)) b1 -= 55;
-//            if ((b2 >= 97)&&(b2 <= 102)) b2 -= 87;
-//            else if ((b2 >= 65)&&(b2 <= 70)) b2 -= 55;
-//            uid += (b1*16+b2);
-//        }
+        return bytes20(uid)
 //                uint160 m = 0;
 //                uint160 b = 0;
 //
