@@ -40,9 +40,12 @@ contract UCamDIDManager is Agentable, DIDManagerBase {
         //
         //        return bytes20(m);
         assembly {
-            let _ptr :=add(msize(),1)
+//            let _ptr :=add(msize(),1)
+//            mstore(_ptr,domainID)
+//            return (_ptr,0x14)
+            let _ptr :=mload(0x40) //0x80
             mstore(_ptr,domainID)
-            return (_ptr,0x14)
+            return (add(_ptr,0xc),0x14)
         }
     }
     event didmsg(bytes msg);
