@@ -20,10 +20,10 @@ contract UCamDIDManager is Agentable, DIDManagerBase {
         uint160 uid = 0;
         uint160 b1;
         uint160 b2;
-        for (uint i = 0; i < 10; i += 2){
+        for (uint i = 0; i < 20; i += 2){
             uid *= 256;
-            b1 = domainID[i];
-            b2 = domainID[i+1];
+            b1 = uint8(domainID[i]);
+            b2 = uint8(domainID[i+1]);
 //            if ((b1 >= 97)&&(b1 <= 102)) b1 -= 87;
 //            else if ((b1 >= 48)&&(b1 <= 57)) b1 -= 48;
 //            else if ((b1 >= 65)&&(b1 <= 70)) b1 -= 55;
