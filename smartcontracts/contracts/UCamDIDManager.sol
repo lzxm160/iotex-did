@@ -30,8 +30,7 @@ contract UCamDIDManager is Agentable, DIDManagerBase {
 //            uid += (b1*16+b2);
 //        }
         assembly {
-            addr := mload(add(did,20))
-
+            addr := mload(add(domainID,20))
         }
     }
     event didmsg(bytes msg);
