@@ -90,9 +90,10 @@ contract DIDBase is IDID, Ownable {
     }
 
     function decodeInternalKey(bytes memory did) public view returns (bytes20);
-
+    event internalKey(bytes20 msg);
     function getHash(bytes memory did) public view returns (bytes32) {
         bytes20 internalKey = decodeInternalKey(did);
+        emit internalKey(internalKey);
         require(db.exist(internalKey), "DID does not exist");
         (,bytes32 h,) = db.get(internalKey);
 
