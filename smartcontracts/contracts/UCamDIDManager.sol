@@ -29,11 +29,10 @@ contract UCamDIDManager is Agentable, DIDManagerBase {
 //            else if ((b2 >= 65)&&(b2 <= 70)) b2 -= 55;
 //            uid += (b1*16+b2);
 //        }
-        bytes20 uid;
-        for (uint i = 0; i < 20; i++){
-            uid[i] = domainID[i];
+        assembly {
+            addr := mload(add(did,20))
         }
-        return uid;
+        return addr;
     }
     event didmsg(bytes msg);
     event reg(address authorizer);
