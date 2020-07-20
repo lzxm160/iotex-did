@@ -64,7 +64,7 @@ contract UCamDIDManager is Agentable, DIDManagerBase {
     }
 
     function bytes20ToString(bytes20 _addr) internal pure returns(string memory) {
-        bytes memory alphabet = "0123456789ABCDEF";
+        bytes memory alphabet = "0123456789abcdef";
         bytes memory str = new bytes(40);
         for (uint i = 0; i < 20; i++) {
             str[i*2] = alphabet[uint8(_addr[i] >> 4)];
