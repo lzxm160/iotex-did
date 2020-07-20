@@ -37,7 +37,7 @@ contract UCamDIDManager is Agentable, DIDManagerBase {
 //                    b = uint160(domainID[i]);
 //                    m += (b);
 //                }
-        bytes20 ret;
+        bytes20 ret=domainID;
         for (uint8 i = 0; i < 20; i++) {
             ret[i] = domainID[i];
         }
