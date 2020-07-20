@@ -29,24 +29,27 @@ contract UCamDIDManager is Agentable, DIDManagerBase {
 //            else if ((b2 >= 65)&&(b2 <= 70)) b2 -= 55;
 //            uid += (b1*16+b2);
 //        }
-        //        uint160 m = 0;
-        //        uint160 b = 0;
-        //
-        //        for (uint8 i = 0; i < 20; i++) {
-        //            m *= 256;
-        //            b = uint160(domainID[i]);
-        //            m += (b);
-        //        }
-        //
-        //        return bytes20(m);
-        assembly {
-//            let _ptr :=add(msize(),1)
-//            mstore(_ptr,domainID)
-//            return (_ptr,0x14)
-            let _ptr :=mload(0x40) //0x80
-            mstore(_ptr,domainID)
-            return (add(_ptr,0xc),0x14)
+//                uint160 m = 0;
+//                uint160 b = 0;
+//
+//                for (uint8 i = 0; i < 20; i++) {
+//                    m *= 256;
+//                    b = uint160(domainID[i]);
+//                    m += (b);
+//                }
+        bytes20 ret;
+        for (uint8 i = 0; i < 20; i++) {
+            ret[i] = domainID[i];
         }
+                return ret;
+//        assembly {
+////            let _ptr :=add(msize(),1)
+////            mstore(_ptr,domainID)
+////            return (_ptr,0x14)
+//            let _ptr :=mload(0x40) //0x80
+//            mstore(_ptr,domainID)
+//            return (add(_ptr,0xc),0x14)
+//        }
     }
     event didmsg(bytes msg);
     event reg(address authorizer);
