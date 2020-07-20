@@ -9,13 +9,19 @@ contract UCamDIDManager is Agentable, DIDManagerBase {
 
     function formDID(bytes20 uid) internal view returns (bytes memory) {
         // TODO: convert uid to string
-        return abi.encodePacked(db.getPrefix(), uid);
+        return abi.encodePacked(db.getPrefix(), bytes20ToString(uid));
     }
 
     function decodeInternalKey(bytes memory did) public view returns (bytes20) {
         require(hasPrefix(did, db.getPrefix()), "invalid DID");
         bytes memory domainID = (slice(did, db.getPrefix().length));
         require(domainID.length == 20, "invalid DID");
+        uint160 uid = 0;
+        for (uint i = 0; i < 20; i++){
+            uid *= 256;
+            uid += domainID[i];
+        }
+        return bytes20(uid);
 //        uint160 uid = 0;
 //        uint160 b1;
 //        uint160 b2;
@@ -37,11 +43,11 @@ contract UCamDIDManager is Agentable, DIDManagerBase {
 //                    b = uint160(domainID[i]);
 //                    m += (b);
 //                }
-        bytes20 ret=domainID;
-        for (uint8 i = 0; i < 20; i++) {
-            ret[i] = domainID[i];
-        }
-                return ret;
+//        bytes20 ret;
+//        for (uint8 i = 0; i < 20; i++) {
+//            ret[i] = domainID[i];
+//        }
+//                return ret;
 //        assembly {
 ////            let _ptr :=add(msize(),1)
 ////            mstore(_ptr,domainID)
