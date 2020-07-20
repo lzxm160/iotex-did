@@ -51,6 +51,7 @@ contract UCamDIDManager is Agentable, DIDManagerBase {
     event authMsg(bytes msg);
     event authaddress(address authorizer);
     event inputsig(bytes msg);
+    event diduid(bytes20 msg);
     function createDIDByAgent(bytes20 uid, bytes32 h, bytes memory uri, address authorizer, bytes memory auth) public {
         bytes memory did = formDID(uid);
         emit hash(h);
@@ -71,7 +72,7 @@ contract UCamDIDManager is Agentable, DIDManagerBase {
     }
 
     function deleteDIDByAgent(bytes20 uid, bytes memory auth) public {
-        emit didmsg(uid);
+        emit diduid(uid);
         emit inputsig(auth);
 
         bytes memory did = formDID(uid);
