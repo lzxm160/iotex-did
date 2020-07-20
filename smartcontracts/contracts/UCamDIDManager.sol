@@ -9,7 +9,7 @@ contract UCamDIDManager is Agentable, DIDManagerBase {
 
     function formDID(bytes20 uid) internal view returns (bytes memory) {
         // TODO: convert uid to string
-        return abi.encodePacked(db.getPrefix(), bytes20ToString(uid));
+        return abi.encodePacked(db.getPrefix(), uid);
     }
 
     function decodeInternalKey(bytes memory did) public view returns (bytes20) {
