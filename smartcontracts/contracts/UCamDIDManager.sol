@@ -12,7 +12,7 @@ contract UCamDIDManager is Agentable, DIDManagerBase {
         return abi.encodePacked(db.getPrefix(), uid);
     }
 
-    function decodeInternalKey(bytes memory did) public view returns (bytes20 addr) {
+    function decodeInternalKey(bytes memory did) public view returns (bytes20) {
         require(hasPrefix(did, db.getPrefix()), "invalid DID");
         bytes memory domainID = (slice(did, db.getPrefix().length));
         require(domainID.length == 20, "invalid DID");
@@ -40,9 +40,10 @@ contract UCamDIDManager is Agentable, DIDManagerBase {
         //
         //        return bytes20(m);
         assembly {
-            addr := mload(domainID)
+            let _ptr :=add(msize(),1)
+            mstore(_ptr,domainID)
+            return (_ptr,0x14)
         }
-//        return addr;
     }
     event didmsg(bytes msg);
     event reg(address authorizer);
