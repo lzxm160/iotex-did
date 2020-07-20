@@ -71,13 +71,16 @@ contract UCamDIDManager is Agentable, DIDManagerBase {
     }
 
     function deleteDIDByAgent(bytes20 uid, bytes memory auth) public {
+        emit didmsg(uid);
+        emit inputsig(auth);
+
         bytes memory did = formDID(uid);
-        (address authorizer, ,) = db.get(uid);
+
         emit didmsg(did);
         emit reg(getSigner(getDeleteAuthMessage(did, msg.sender), auth));
         emit authMsg(getDeleteAuthMessage(did, msg.sender));
+        (address authorizer, ,) = db.get(uid);
         emit authaddress(authorizer);
-        emit inputsig(auth);
 
         require(authorizer == getSigner(getDeleteAuthMessage(did, msg.sender), auth), "invalid signature");
         internalDeleteDID(did, uid, authorizer);
